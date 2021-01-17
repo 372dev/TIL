@@ -1,5 +1,5 @@
 # LFM_01 - JSP / Servlet Setup
-## 실수에서 배우자 01 - JSP / Servlet 환경설정
+## :muscle:실수에서 배우자 01 - JSP / Servlet 환경설정
 * JSP / Servlet 수업이 끝난 후, 복습할 내용을 한곳에 모아두기 위해 프로젝트의 디렉토리를 이동하였다.
 * 이동한 장소에서 웹 프로젝트가 작동하지 않았다.
 * 자바 프로젝트의 위치를 바꾸고 싶은 경우 export와 import를 사용해야 한다!
