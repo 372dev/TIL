@@ -57,6 +57,12 @@
 
 ## :mag:시행착오
 1. 정상적으로 export되지 않은 프로젝트를 되살리고 싶을 때, 프로젝트 타입의 선택이 잘못될 경우 컴파일이 안되고 오류를 해결하려 해도 시간만 낭비될 수 있다. 이번의 경우엔 새로운 Dynamic Web Project를 새로 생성한 후에 작업 내용만 복사해오는 방식으로 해결했다.
-2. git에서 가져온 프로젝트엔 gitignore로 인해 빠진 내용이 많을 것이다. Eclipse Navigator에는 나타나지 않는 치명적 오류를 가진 파일이나 Libraries 내용이 Project Explorer에는 명확히 표현되니 잘 활용하도록 하자.
+2. 생성된 프로젝트에 지구본 모양이 없다? 자바 애플리케이션으로만 인식이 된 프로젝트를 아래 과정을 통해서 프로젝트를 다이나믹 웹 프로젝트로 바꿀 수 있다.
+   * 오른쪽 클릭하여 나오는 메뉴에서 Properties 선택 -> Project Facets 선택 -> Dynamic Web Module과 Java의 버전을 설정해준다.
+   * Dynamic Web Module 선택 옵션이 보이지 않을 경우엔 Configuration에서 Dynamic Web Project 선택한 뒤 버전을 설정해준다.
 
-![explorer](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_05.png)
+![facet](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_05.png)
+
+3. git에서 가져온 프로젝트엔 gitignore로 인해 빠진 내용이 많을 것이다. Eclipse의 경우 Navigator에는 나타나지 않는 치명적 오류를 가진 파일이나 Libraries 내용이 Project Explorer에는 명확히 표현되니 잘 활용하도록 하자.
+
+![explorer](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_06.png)
