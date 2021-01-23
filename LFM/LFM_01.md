@@ -66,3 +66,5 @@
 3. git에서 가져온 프로젝트엔 gitignore로 인해 빠진 내용이 많을 것이다. Eclipse의 경우 Navigator에는 나타나지 않는 치명적 오류를 가진 파일이나 Libraries 내용이 Project Explorer에는 명확히 표현되니 잘 활용하도록 하자.
 
 ![explorer](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_06.png)
+
+4. .settings 폴더와 .classpath 파일을 함부로 건드리지 말자!

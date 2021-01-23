@@ -155,3 +155,9 @@ interface Flyable {
 interface Perfomable extends Flyable,Dancable {
 } //'perform()' in 'Dancable' clashes with 'perform()' in 'Flyable'; methods have unrelated return types
 ```
+
+-References :
+Java in a Nutshell by Benjamin J.Evans & David Flanagan
+https://dev-coco.tistory.com/13
+https://k3068.tistory.com/34
+https://www.notion.so/8-0cc8c251d5374ac882a4f22fa07c4e6a
