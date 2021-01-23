@@ -92,4 +92,66 @@ for (Flyable element : list) {
 ```
 
 #### :mag:인터페이스 상속
+앞서 추상클래스와 인터페이스의 차이점에 대해서 언급할 때 인터페이스는 다중상속이 가능하다고 이야기 했다. 클래스가 인터페이스를 구현할때도 다중상속이 가능하지만 인터페이스도 다른 인터페이스를 다중상속할 수 있다.
 
+###### 인터페이스가 인터페이스를 상속
+인터페이스는 다른 인터페이스를 상속받을 수 있다. 클래스와 마찬가지로 인터페이스도 extends 구문을 통해 상속이 이루어 진다. 상속을 하게 되면 상위 인터페이스의 모든 메소드와 상수를 상속받으며 자신만의 새로운 메소드와 상수를 사용할 수도 있다. 
+클래스의 상속과 다른 점은 상속할 때도 다중상속이 가능하다는 것이다.
+
+즉, 인터페이스는 다른 여러개의 인터페이스를 상속할 수 있으며 상속한 각각의 상위 인터페이스가 가진 모든 메소드와 상수를 상속 받는다.
+
+###### 클래스가 구현한 인터페이스가 상속한 인터페이스
+그렇게 다수의 인터페이스를 상속받은 인터페이스를 클래스가 구현하게 되면, 클래스는 구현하는 인터페이스의 메소드와 상수를 모두 구현해야 하고, 또한 구현하는 인터페이스의 상위 인터페이스들의 모든 추상메소드와 상수들도 구현해야 한다.
+
+```java
+interface Drawble {
+  void draw();
+}
+interface Printable extends Drawble {
+  void print();
+}
+
+class Circle implements Printable {
+  @Override
+  public void draw() {
+  }
+  @Override
+  public void print() {
+  }
+}
+```
+
+인터페이스의 메소드들은 추상 메소드이기 때문에 동일한 메소드가 상위 인터페이스들 에서 선언되었더라도 구현 시점에서는 문제가 되지 않는다.
+
+```java
+interface Dancable {
+  void perform();
+}
+interface Flyable {
+  void perform();
+}
+
+interface Perfomable extends Dancable, Flyable {
+}
+
+class Superman implements Perfomable {
+  @Override
+  public void perform() {
+  }
+}
+```
+
+다만 리턴 타입이 다른 경우 컴파일 에러가 발생할 수 있다.
+
+```java
+interface Dancable {
+    void perform();
+}
+
+interface Flyable {
+    boolean perform();
+}
+
+interface Perfomable extends Flyable,Dancable {
+} //'perform()' in 'Dancable' clashes with 'perform()' in 'Flyable'; methods have unrelated return types
+```
