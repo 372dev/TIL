@@ -68,3 +68,5 @@
 ![explorer](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_06.png)
 
 4. .settings 폴더와 .classpath 파일을 함부로 건드리지 말자!
+
+5. build 폴더는 직접 지우기 보다는 프로젝트 Clear를 이용하자! 프로젝트 Clear를 이용해서 가끔 수정된 스타일이나 코드를 적용시키지 못하는 바보 이클립스가 정신을 차리게 해줄수도 있다.
