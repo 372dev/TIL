@@ -29,7 +29,7 @@ public class MyClass extends MySuperClass implements YourInterface, MyInterface 
 ```
 
 #### :mag:메소드 정의하는 방법
-
+보통 다른언어에는 함수라는 것이 별도로 존재한다. 하지만 자바는 클래스를 떠나 존재하는 것은 있을 수 없기 때문에 자바의 함수는 따로 존재하지 않고 클래스 내에 존재한다. 자바는 이 클래스 내의 함수를 메소드라고 부른다.
 
 #### :mag:객체 만드는 방법 (new 키워드 이해하기)
 Now that we’ve covered fields and methods, let’s move on to other important mem‐
@@ -73,15 +73,15 @@ In Java, a constructor is just like a method but without return type. It can als
 
 Constructor overloading in Java is a technique of having more than one constructor with different parameter lists. They are arranged in a way that each constructor performs a different task. They are differentiated by the compiler by the number of parameters in the list and their types.
 
---Difference between constructor and method in Java
-There are many differences between constructors and methods. They are given below.
+--자바에서의 생성자와 메소드의 차이
 
-Java Constructor	Java Method
-A constructor is used to initialize the state of an object.	A method is used to expose the behavior of an object.
-A constructor must not have a return type.	A method must have a return type.
-The constructor is invoked implicitly.	The method is invoked explicitly.
-The Java compiler provides a default constructor if you don't have any constructor in a class.	The method is not provided by the compiler in any case.
-The constructor name must be same as the class name.	The method name may or may not be same as the class name.
+| 자바 생성자                                                          | 자바 메소드                                                       |
+|----------------------------------------------------------------------|-------------------------------------------------------------------|
+| 해당 클래스의 인스턴스인 객체를 생성하기 위해서 생성자가 이용된다    | 객체의 능동적인 기능을 정의하기 위해서 이용된다                   |
+| 생성자에는 리턴타입이 없다                                           | 메소드는 리턴 타입을 갖는다                                       |
+| 생성자는 묵시적으로 이용된다                                         | 메소드는 명시적으로 이용된다                                      |
+| 생성자를 작성하지 않을 경우, 자바 컴파일러가 기본생성자를 제공해준다 | 메소드는 어떤 경우에도 컴파일 단계에서 자동적으로 제공되지 않는다 |
+| 생성자 이름은 클래스 이름과 같아야 한다                              | 메소드 이름은 클래스 이름과 같을수도 다를수도 있다                |
 
 
 -References :
