@@ -27,9 +27,8 @@ public class MyClass extends MySuperClass implements YourInterface, MyInterface 
     // 필드, 생성자, 메소드 선언
 }
 ```
-
-#### :mag:메소드 정의하는 방법
-보통 다른언어에는 함수라는 것이 별도로 존재한다. 하지만 자바는 클래스를 떠나 존재하는 것은 있을 수 없기 때문에 자바의 함수는 따로 존재하지 않고 클래스 내에 존재한다. 자바는 이 클래스 내의 함수를 메소드라고 부른다.
+###### 접근지정자
+![Class_modifiers](https://raw.githubusercontent.com/372dev/TIL/main/JAVA/img/05_Class_01_modifier.jpg)
 
 #### :mag:객체 만드는 방법 (new 키워드 이해하기)
 Now that we’ve covered fields and methods, let’s move on to other important mem‐
@@ -55,6 +54,8 @@ matically delcare a constructor.
 
 #### :mag:this 키워드 이해하기
 
+#### :mag:메소드 정의하는 방법
+보통 다른언어에는 함수라는 것이 별도로 존재한다. 하지만 자바는 클래스를 떠나 존재하는 것은 있을 수 없기 때문에 자바의 함수는 따로 존재하지 않고 클래스 내에 존재한다. 자바는 이 클래스 내의 함수를 메소드라고 부른다.
 
 #### :mag:생성자 정의하는 방법
 --A constructor is called "Default Constructor" when it doesn't have any parameter.
@@ -67,13 +68,12 @@ public MyClass() { super(); }
 --Java Parameterized Constructor
 A constructor which has a specific number of parameters is called a parameterized constructor.
 
+###### 자바 생성자의 오버로딩
+자바의 생성자는 마치 리턴타입이 없는 자바 메소드와 같다. 메소드와 마찬가지로 생성자도 오버로딩이 가능하다.
+생성자 오버로딩을 이용하여 서로 다른 매개변수를 가진 생성자를 여러개 만들 수 있다. 여러개의 생성자를 가짐으로서 각각의 생성자가 서로 다른 역할을 수행하도록 할 수 있다. 
+컴파일러는 각각의 오버로딩된 생성자를 매개변수의 개수나 타입의 차이를 통해 구분할 수 있다.
 
---Constructor Overloading in Java
-In Java, a constructor is just like a method but without return type. It can also be overloaded like Java methods.
-
-Constructor overloading in Java is a technique of having more than one constructor with different parameter lists. They are arranged in a way that each constructor performs a different task. They are differentiated by the compiler by the number of parameters in the list and their types.
-
---자바에서의 생성자와 메소드의 차이
+###### 자바 생성자와 자바 메소드의 차이
 
 | 자바 생성자                                                          | 자바 메소드                                                       |
 |----------------------------------------------------------------------|-------------------------------------------------------------------|
