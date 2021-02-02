@@ -1,4 +1,4 @@
-# LFM_01 - JSP / Servlet Setup
+# LFM_01_JSP/Servlet_Setup
 ## :muscle:실수에서 배우자 01 - JSP / Servlet 환경설정
 * JSP / Servlet 수업이 끝난 후, 복습할 내용을 한곳에 모아두기 위해 프로젝트의 디렉토리를 이동하였다.
 * 이동한 장소에서 웹 프로젝트가 작동하지 않았다.
@@ -6,7 +6,7 @@
 * 또한 프로젝트를 시작할 때 설정 내용을 기록해 두는 것도 좋을 것 같다.
 * 아래 내용은 복구를 시도하는 과정에서 사용했던 설정들이다.
 
-## :mag:자바 환경설정
+### :star:자바 환경설정
 1. JDK 설치
    * Oracle 1.8.0-openjdk 혹은 Amazon Correto jdk11.0.8
 2. 환경 변수 설정
@@ -29,7 +29,7 @@
 
 ![encoding](https://raw.githubusercontent.com/372dev/TIL/main/LFM/img/01_03.png)
 
-## :mag:JSP / Servlet 설정
+### :star:JSP / Servlet 설정
 1. 웹컨테이너 설치
    * 아파치 톰캣 (ApacheTomcat 8.5 혹은 9.0) 설치
 2. 이클립스에서 서버 생성
@@ -42,7 +42,7 @@
    * (선택적) Server Locations에서 Use Tomcat installation을 선택, Server Options에서 Publish module contexts to separate XML files를 선택.
    * 콘솔창 오른쪽에서 Publish to the server 버튼을 클릭하여 변경 내역을 동기화 한다.
 
-## :mag:기타 설정
+### :star:기타 설정
 1. JDBC 드라이버 설정
    * Oracle 에서 JDBC 드라이버를 다운로드 한다.
    * 임의의 장소에 저장한 뒤 경로설정을 해줄 수 있다.
@@ -55,7 +55,7 @@
    * servlets.com/cos 에서 cos를 다운로드 받는다.
    * JDBC와 동일하게 라이브러리에 추가해준다.
 
-## :mag:시행착오
+### :star:시행착오
 1. 정상적으로 export되지 않은 프로젝트를 되살리고 싶을 때, 프로젝트 타입의 선택이 잘못될 경우 컴파일이 안되고 오류를 해결하려 해도 시간만 낭비될 수 있다. 이번의 경우엔 새로운 Dynamic Web Project를 새로 생성한 후에 작업 내용만 복사해오는 방식으로 해결했다.
 2. 생성된 프로젝트에 지구본 모양이 없다? 자바 애플리케이션으로만 인식이 된 프로젝트를 아래 과정을 통해서 프로젝트를 다이나믹 웹 프로젝트로 바꿀 수 있다.
    * 오른쪽 클릭하여 나오는 메뉴에서 Properties 선택 -> Project Facets 선택 -> Dynamic Web Module과 Java의 버전을 설정해준다.
