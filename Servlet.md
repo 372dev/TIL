@@ -38,6 +38,7 @@ private class 서블릿이름 extends HttpServlet {
 물론 대부분 상황에서 어노테이션을 이용하겠지만 간혹 web.xml을 이용하게 될 상황이 있을 수 있다.
 
 ### :star:서블릿 요청/응답
+사용자의 요청과 웹서버의 응답을 담당하는 객체
 
 #### :mag:request 객체와 response 객체에서 문자인코딩을 변경하는 코드
 
@@ -62,13 +63,18 @@ response.setContentType("txt/html; charset=UTF-8");
 
 필터를 이용할 경우엔 모든 url 패턴에 필터를 적용한 상태에서 인코딩 옵션을 작성하고 chain.doFilter(request, response); 하여 적용시킬 수 있다.
 
+#### :mag:request 주요 메서드
+
+#### :mag:response 주요 메서드
+
+
 
 ### :star:서블릿 라이프 사이클
 1. 서블릿 객체 생성
 2. 서버가 init() 메소드 호출하여 서블릿 초기화
 3. service() 메소드 호출, 요청 방식이 GET이면 doGet() 실행, POST이면 doPost() 메소드 실행
 4. doGet() 혹은 doPost() 실행
-5. destroy() 메소드 호출, 서블릿 제거
+5. destroy() 메소드 호출, 서블릿 종료
 
 * 각각의 메소드를 오버라이드 하여 System.out을 작성하면 서블릿 실행시 메세지를 통해 콘솔에서 라이프 사이클을 확인할 수 있다.
 
