@@ -1,4 +1,4 @@
-# Java_06_Inheritance
+# Java_06_Inheritance_01
 
 ## :muscle:상속
 상속은 객체지향 프로그래밍의 가장 중요한 요소중 하나이며, 객체나 클래스를 다른 객체나 클래스에 기반하여 만드는 과정이다.
@@ -7,15 +7,19 @@
 상속은 하나의 객체가 상위 객체의 요소와 특성을 모두 갖게되는 것이다. 자바에서 상속은 이미 존재하는 클래스를 이용하여 새로운 클래스를 만들기 위함인데, 이미 존재하는 클래스를 상속하게 되면 해당 클래스의 메서드와 필드를 가져와서 사용할 수 있다. 나아가 상속을 받은 클래스에 추가적으로 다른 메서드와 필드를 작성할 수 있다.
 상속은 IS-A 관계이며 이는 부모-자식 관계로도 불리운다.
 
+기본 신텍스는 다음과 같다  
+>class 자식클래스명 extends 부모클래스명 { }  
+
 상속을 이용하는 근본적 이유
 * 메서드 오버라이딩 (런타임 다형성을 위해서).
 * 코드의 재사용을 위해서.
 
 상속 용어
 * 클래스(Class): 클래스는 공통적인 속성을 지닌 객체들의 집합이다. 객체의 생성을 위한 틀이라고 할수도 설계도면이라고 할수도 있다.
-* 하위클래스/자식클래스(Sub Class/Child Class) : 하위클래스는 다른 클래스로부터 상속을 받는다. 파생(derived)클래스, 확장(extended)클래스, 또는 자식클래스 라고도 한다.
-* 상위클래스/부모클래스(Super Class/Parent Class) : 하위클래스는 상위클래스로부터 요소들을 상속받는다. (base)클래스, 또는 부모클래스 라고도 한다.
-* 재사용성(Reusability) : As the name specifies, reusability is a mechanism which facilitates you to reuse the fields and methods of the existing class when you create a new class. You can use the same fields and methods already defined in the previous class.
+* 하위클래스/자식클래스(Sub Class/Child Class) : 하위클래스는 다른 클래스로부터 상속을 받는다. 파생(derived)클래스, 확장(extended)클래스 라고도 한다.
+* 상위클래스/부모클래스(Super Class/Parent Class) : 하위클래스는 상위클래스로부터 요소들을 상속받는다. 기반(base)클래스 라고도 한다.
+* 재사용성(Reusability) : 재사용성이라는 이름에서 알 수 있듯, 하위 클래스에서 상위 클래스의 필드와 메서드를 사용할 수 있다.
+
 #### :mag:클래스의 상속
 자바는 C++와 다르게 다중상속을 지원하지 않는다.
 
@@ -119,31 +123,65 @@ class TestSuper3 {
 }  
 ```
 
-### :star:메서드 오버라이딩
-If subclass (child class) has the same method as declared in the parent class, it is known as method overriding in Java.
-
-In other words, If a subclass provides the specific implementation of the method that has been declared by one of its parent class, it is known as method overriding.
-
-* Usage of Java Method Overriding
-  * Method overriding is used to provide the specific implementation of a method which is already provided by its superclass.
-  * Method overriding is used for runtime polymorphism.
-
-* Rules for Java Method Overriding
-  1. The method must have the same name as in the parent class.
-  2. The method must have the same parameter as in the parent class.
-  3. There must be an IS-A relationship (inheritance).
-
-### :star:다이나믹 메서드 디스패치 (Dynamic Method Dispatch)
-
 ### :star:추상 클래스
+자바에서는 abstract 키워드와 함께 클래스가 선언되면 이를 추상 클래스라 한다. 추상 클래스는 추상 메서드를 가질 수 있고 일반 메서드도 가질 수 있다.
 
-#### :mag:인터페이스와 추상클래스
-인터페이스는 추상클래스와 비슷하나 추상클래스 보다 추상화 정도가 더 높다. 08_Interface에서 자세히 알아보자.
+일단 추상화가 무엇인지 먼저 알아보자.
 
-### :star:final 키워드
+#### :mag:추상화
+추상화는 사용자로부터 구현 디테일을 감추고 기능성만을 보여주는 것이다.
 
-### :star:Object 클래스
+필수적인 요소만 노출되며 세부적인 사항은 보이지 않게 된다. 예를 들어, 친구에게 문자를 보낸다고 했을 때, 문자를 작성하고 보내는 기능은 눈에 보이지만 입력된 값이 어떻게 저장되어서 전송되는지의 과정은 사용자에게 보이지 않는다.
+
+추상화를 통해 사용자는 객체의 작동원리 대신 기능에 집중할 수 있다.
+
+* 자바에서 추상화를 이루기 위해서, 비슷하지만 다르게 두가지 방법이 있다.
+  1. 추상 클래스 (0 ~ 100% 추상화)
+  2. 인터페이스 (100% 추상화)
+
+#### :mag:인터페이스와 추상 클래스
+이렇듯 인터페이스는 추상클래스와 비슷하나 추상클래스 보다 추상화 정도가 더 높다. 08_Interface에서 자세히 알아보자.
+
+#### :mag:추상 클래스
+abstract 키워드와 함께 클래스가 선언되면 이를 추상 클래스라 한다. 추상 클래스는 추상 메서드를 가질 수 있고 일반 메서드도 가질 수 있다. 추상 클래스는 상속되고 나서야 사용될 수 있고, 그 자체만으로는 인스턴스화 될 수 없다.
+
+>abstract class A {}  
+
+* 자바 추상 클래스의 규칙
+  1. 추상 클래스는 abstract 키워드로 선언된다.
+  2. 추상 메서드와 일반 메서드를 가질 수 있다.
+  3. 추상 클래스만으로는 인스턴스화 될 수 없다.
+  4. 생성자를 가질 수 있고 static 메서드도 가질 수 있다.
+  5. final 메서드를 가질 수 있고, 이 경우엔 자식 클래스에서 해당 메서드의 내용을 변경할 수 없다.
+
+#### :mag:추상 메서드
+abstract 키워드와 함께 선언되며 내용이 작성되지 않은 메서드를 추상 메서드라고 한다.
+
+```java
+abstract class 자전거 {  
+	abstract void run();
+	void park() {
+		System.out.println("주차했습니다");
+	}
+}  
+
+class 삼천리 extends 자전거 {  
+	void run() {
+		System.out.println("속도 3000 m/h");
+	}
+}
+
+class Test {
+	public static void main(String args[]){  
+		자전거 bike = new 삼천리();
+		bike.run(); // "속도 3000 m/h"
+		bike.park(); // "주차했습니다"
+		}  
+}  
+```
 
 -References :
 Java in a Nutshell by Benjamin J.Evans & David Flanagan  
 https://www.javatpoint.com/inheritance-in-java  
+https://www.javatpoint.com/super-keyword   
+https://www.javatpoint.com/abstract-class-in-java

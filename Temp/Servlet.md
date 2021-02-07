@@ -78,6 +78,10 @@ response.setContentType("txt/html; charset=UTF-8");
 
 * 각각의 메소드를 오버라이드 하여 System.out을 작성하면 서블릿 실행시 메세지를 통해 콘솔에서 라이프 사이클을 확인할 수 있다.
 
+### :star:form 데이터 처리
+* GET 방식 : 사용자 정보가 URL에 노출되며 보안에 취약
+* POST 방식 : URL에는 매핑 정보만 노출되며 
+
 -References :
 실전 JSP (renew ver.) - 신입 프로그래머를 위한 강좌 by 인프런  
 https://dololak.tistory.com/56  
