@@ -41,8 +41,8 @@ public class MyClass extends MySuperClass implements YourInterface, MyInterface 
   * 인스턴스 메서드 - 인스턴스 변수와 연관된 작업을 하는 메서드이다. 인스턴스를 통해 호출할 수 있으므로 반드시 먼저 인스턴스를 생성해야 한다.
   * 클래스 메서드 - 정적 메서드라고도 한다. 일반적으로 인스턴스와 관계없는 메서드를 클래스 메서드로 정의한다.
 
-#### :mag:접근지정자
-![Class_modifiers](https://raw.githubusercontent.com/372dev/TIL/main/JAVA/img/05_Class_01_modifier.jpg)
+#### :mag:접근지시자
+![access_modifiers](https://raw.githubusercontent.com/372dev/TIL/main/JAVA/img/05_Class_01_modifier.jpg)
 
 -References :
 Java in a Nutshell by Benjamin J.Evans & David Flanagan  
