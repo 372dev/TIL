@@ -2,57 +2,44 @@
 
 ## :muscle:패키지
 패키지는 클래스들, 인터페이스들과 참조 변수들의 모음에 이름을 붙여놓은 것이다. 연관되어 있는 클래스들을 그룹지어주고 분류된 그룹별 명칭을 붙여주는 역할을 한다.
-자바의 핵심 클래스들은 java 라는 이름의 패키지 안에 들어 있다. 예를 들어, 자바 언어의 기반역할을 하는 클래스들은 java.lang. 패키지 안에 있다. 다양한 유틸리티 클래스들은 java.util. 패키지 안에 있다.
-The core classes of the Java platform are in packages whose names begin with java.
-For example, the most fundamental classes of the language are in the package
-java.lang. Various utility classes are in java.util. Classes for input and output are
-in java.io, and classes for networking are in java.net. Some of these packages
-contain subpackages, such as java.lang.reflect and java.util.regex. Exten‐
-sions to the Java platform that have been standardized by Oracle (or originally Sun)
-typically have package names that begin with javax. Some of these extensions, such
-as javax.swing and its myriad subpackages, were later adopted into the core plat‐
-form itself. Finally, the Java platform also includes several “endorsed standards,”
-which have packages named after the standards body that created them, such as
-org.w3c and org.omg.
-Every class has both a simple name, which is the name given to it in its definition,
-and a fully qualified name, which includes the name of the package of which it is a
-part. The String class, for example, is part of the java.lang package, so its fully
-qualified name is java.lang.String.
+자바의 핵심 클래스들은 다음과 같이 java 라는 이름의 패키지 안에 들어 있다.
 
+* 자바 언어의 기반역할을 하는 클래스들은 java.lang. 패키지 안에 있다.
+* 다양한 유틸리티 클래스들은 java.util. 패키지 안에 있다.
+* 입출력을 위한 클래스들은 java.io 패키지에 있다
+* 네트워킹을 위한 클래스들은 java.net. 패키지 안에 있다.
+
+이들 패키지들은 서브패키지를 갖고 있기도 한다. 예를 들자면 java.lang 안에는 java.lang.reflect 이 있고 java.util 안에는 java.util.regex 가 있다.
+
+Oracle(과거에는 Sun)에 의해서 규정된 추가기능(extension)들의 패키지는 javax로 시작한다. 이들 추가기능의 일부는 시간이 지나며 자바 기본 기능으로 편입되기도 했다.
+
+마지막으로, "보증된 표준"이 몇가지 있다. 이들 패키지들은 해당 보증을 작성한 기관을 따라 이름지어졌다. 예를들어 org.w3c 이나 org.omg가 있다.
+
+모든 클래스는 정식명칭과 별칭을 갖고 있다. 정식 명칭은 FQN(fully qualified name) 이라고도 하며 패키지 경로를 모두 포함한 이름이고, 별칭(Alias)은 클래스가 작성될때 지어진 이름이다.
+예를 들어 String 클래스의 경우 "String"은 별칭이고, 위치는 java.lang 패키지 안에 있으므로 정식 명칭은 java.lang.String 이다.
 
 ### :star:package 키워드
-To specify the package a class is to be part of, you use a package declaration. The
-package keyword, if it appears, must be the first token of Java code (i.e., the first
-thing other than comments and space) in the Java file. The keyword should be
-followed by the name of the desired package and a semicolon. Consider a Java file
-that begins with this directive:
-package org.apache.commons.net;
-All classes defined by this file are part of the package org.apache.commons.net.
-If no package directive appears in a Java file, all classes defined in that file are part of
-an unnamed default package. In this case, the qualified and unqualified names of a
-class are the same.
-The possibility of naming conflicts means that you should not
-use the default package. As your project grows more compli‐
-cated, conflicts become almost inevitable—much better to cre‐
-ate packages right from the start.
+클래스가 위치한 패키지를 기술하기 위해 package 키워드를 통해 선언한다. package 선언은 자바 파일의 페이지 최 상단에 작성하며 다른 코멘트나 빈 공간을 두지 않아야 한다. package 키워드를 쓰고 그 뒤에 패키지 경로를 기술한뒤 세미콜론으로 닫는다.
 
+>package org.apache.commons.net;
+
+위와 같은 패키지가 선언되었다고 했을 때, 해당 파일에서 선언된 클래스들은 org.apache.commons.net 패키지에 포함되게 된다.
+
+아무런 패키지가 선언되지 않았다면, 모든 클래스는 이름이 정해지지 않은 기본 패키지에 포함되게 된다. 이 경우에는 패키지 경로가 없기 때문에 클래스의 별칭과 정식 명칭이 같다.
+중복된 이름으로 충돌이 일어나는 것을 방지하기 위해서 기본 패키지는 사용하지 않아야 한다. 프로젝트가 더 복잡해질 수록 충돌을 피하기 힘들어진다. 때문에 프로젝트를 시작할 때 부터 패키지를 설정해 주는 것이 좋다.
 
 ### :star:import 키워드
-When referring to a class or interface in your Java code, you must, by default, use
-the fully qualified name of the type, including the package name. If you’re writing
-code to manipulate a file and need to use the File class of the java.io package, you
-must type java.io.File.
+자바 코드를 작성하며 클래스나 인터페이스를 불러올 때, 기본적으로 정식 명칭을 사용해야 한다. 패키지 경로를 포함한 클래스와 인터페이스 이름을 적어야 한다는 것인데 예를들어 파일을 조작하는 File 클래스를 사용하고 싶다면 java.io.File이라고 작성해야 한다.
 
-This rule has three exceptions:
+이 규칙에는 세가지 예외가 있는데,
 
-* Types from the package java.lang are so important and so commonly used
-that they can always be referred to by their simple names.
-* The code in a type p.T may refer to other types defined in the package p by
-their simple names.
-* Types that have been imported into the namespace with an import declaration
-may be referred to by their simple names.
+1. java.lang의 타입들은 자바 언어의 기반이며 매우 중요하기 때문에 패키지명 없이 별칭만으로 어디서든 사용이 가능하다.
+2. p.T(패키지.타입) 의 형태로 작성하면 해당 패키지 밖의 다른 패키지(p)의 타입(T)을 지칭할 수 있다.
+3. 해당 구역 안에서 import문으로 불러와진 타입의 경우 별칭만으로도 사용할 수 있다.
 
-The first two exceptions are known as “automatic imports.” The types from
+1번과 2번 예외는 "자동 임포트(automatic imports)"라고 알려져 있다.
+
+The types from
 java.lang and the current package are “imported” into the namespace so that they
 can be used without their package name. Typing the package name of commonly
 used types that are not in java.lang or the current package quickly becomes tedi‐
