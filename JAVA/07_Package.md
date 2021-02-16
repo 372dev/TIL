@@ -19,7 +19,7 @@ Oracle(과거에는 Sun)에 의해서 규정된 추가기능(extension)들의 �
 예를 들어 String 클래스의 경우 "String"은 별칭이고, 위치는 java.lang 패키지 안에 있으므로 정식 명칭은 java.lang.String 이다.
 
 ### :star:package 키워드
-클래스가 위치한 패키지를 기술하기 위해 package 키워드를 통해 선언한다. package 선언은 자바 파일의 페이지 최 상단에 작성하며 다른 코멘트나 빈 공간을 두지 않아야 한다. package 키워드를 쓰고 그 뒤에 패키지 경로를 기술한뒤 세미콜론으로 닫는다.
+클래스가 위치한 패키지를 기술하기 위해 package 키워드를 통해 선언한다. package 선언은 자바 파일의 페이지 최상단에 작성하며 다른 코멘트나 빈 공간을 두지 않아야 한다. package 키워드를 쓰고 그 뒤에 패키지 경로를 기술한뒤 세미콜론으로 닫는다.
 
 >package org.apache.commons.net;
 
@@ -35,60 +35,48 @@ Oracle(과거에는 Sun)에 의해서 규정된 추가기능(extension)들의 �
 
 1. java.lang의 타입들은 자바 언어의 기반이며 매우 중요하기 때문에 패키지명 없이 별칭만으로 어디서든 사용이 가능하다.
 2. p.T(패키지.타입) 의 형태로 작성하면 해당 패키지 밖의 다른 패키지(p)의 타입(T)을 지칭할 수 있다.
-3. 해당 구역 안에서 import문으로 불러와진 타입의 경우 별칭만으로도 사용할 수 있다.
+3. 해당 네이스페이스(namespace) 구역 안에서 import문으로 불러와진 타입의 경우 별칭만으로도 사용할 수 있다.
 
 1번과 2번 예외는 "자동 임포트(automatic imports)"라고 알려져 있다.
+java.lang의 타입들과 현재 위치한 패키지는 해당 네임스페이스에 임포트된(imported) 상태이므로 패키지 경로 없이 사용 가능하다. java.lang의 타입들과 현재 경로 패키지를 궂이 경로를 적어가며 정식 명칭으로 사용하자면 그럴수는 있겠으나 의미없는 일이다.
 
-The types from
-java.lang and the current package are “imported” into the namespace so that they
-can be used without their package name. Typing the package name of commonly
-used types that are not in java.lang or the current package quickly becomes tedi‐
-ous, and so it is also possible to explicitly import types from other packages into the
-namespace. This is done with the import declaration.
-import declarations must appear at the start of a Java file, immediately after the
-package declaration, if there is one, and before any type definitions. You may use
-any number of import declarations in a file. An import declaration applies to all
-type definitions in the file (but not to any import declarations that follow it).
-The import declaration has two forms. To import a single type into the namespace,
-follow the import keyword with the name of the type and a semicolon:
+마찬가지로 현재 네임스페이스에서 다른 패키지의 타입을 명시적으로 임포트할 수 있다. 이는 임포트문을 통해서 가능하다. 임포트 문은 타입 선언부보다 앞에 있어야 하므로 자바 파일의 최상단에 위치한 패키지 선언에 뒤따라 위치해야 한다. 패키지 선언이 없다면 가장 위에 위치하면 된다. 임포트문은 얼마든지 많이 사용해도 괜찮다. 임포트의 선언은 해당 파일 안의 모든 타입의 작성에 적용된다.
+
+임포트 선언은 두가지 형태로 가능하다.
+
+1. 싱글 타입 임포트(single type import)
 
 ```java
 import java.io.File;
 ```
 
-// Now we can type File instead of java.io.File
-This is known as the “single type import" declaration.
-The other form of import declaration is the “on-demand type import.” In this form,
-you specify the name of a package followed by the characters .* to indicate that any
-type from that package may be used without its package name. Thus, if you want to
-use several other classes from the java.io package in addition to the File class, you
-can simply import the entire package:
+  * 임포트 선언이 되었으니 java.io.File의 정식 명칭 대신에 File 이라는 별칭을 사용할 수 있다. 이 방식은 싱글 타입 임포트(single type import)라고 불리우는 선언 방식이다.
+
+2. 온 디맨드 타입 임포트(on-demand type import)
 
 ```java
 import java.io.*;
 ```
 
-// Use simple names for all classes in java.io
-This on-demand import syntax does not apply to subpackages. If I import the
-java.util package, I must still refer to the java.util.zip.ZipInputStream class
-by its fully qualified name.
-Using an on-demand type import declaration is not the same as explicitly writing
-out a single type import declaration for every type in the package. It is more like an
-explicit single type import for every type in the package that you actually use in your
-code. This is the reason it’s called "on demand"; types are imported as you use them.
+  * 다른 한가지 임포트 방식은 온 디맨드 타입 임포트(on-demand type import) 이며, 패키지 경로 뒤에 ".\*" 을 붙여준다. 해당 패키지의 모든 타입은 이제 패키지 경로 없이 사용 가능하다. 그러므로, File 클래스 하나만이 아니라 io 패키지 안의 여러 클래스를 사용하고 싶다면 이렇게 패키지 전체를 임포트 하면 된다.
+  * 다만 온 디맨드 타입 임포트는 해당 패키지에만 적용되며 서브패키지에는 적용되지 않는다. java.util 패키지를 임포트 한 경우, ZipInputStream 클래스를 사용하고 싶다면 정식 명칭으로 전체 경로(java.util.zip.ZipInputStream)를 임포트 해줘야 한다.
+  * 온 디맨드 타입 임포트를 한다고 해서 해당 패키지 안의 모든 타입이 빠짐없이 임포트 되는 것은 아니다. 코드를 작성하며 실제로 사용하는 타입에 대해서만 임포트가 자동으로 이뤄진다. 그렇기 때문에 "on demand"라는 이름이 붙었다. 사용여부에 따라 임포트가 이뤄진다.
 
 #### :mag:Java Static Import
 
-The static import feature of Java 5 facilitate the java programmer to access any static member of a class directly. There is no need to qualify it by the class name.
+자바 5버전에서 소개된 스태틱 임포트(Static Import)는 프로그래머가 클래스의 어느 정적 멤버에든 바로 접근할 수 있게 해준다. 클래스 이름을 통하지 않아도 사용이 가능해진다.
 
-Advantage of static import:
-Less coding is required if you have access any static member of a class oftenly.
+* 스태틱 임포트의 장점 : 클래스의 정적 멤버에 몇번이던 바로 접근이 가능하므로 코드의 양이 줄어든다.
 
-Disadvantage of static import:
-If you overuse the static import feature, it makes the program unreadable and unmaintainable.
+* 스태틱 임포트의 단점 : 이 기능을 과하게 사용할 경우, 코드의 가독성이 떨어지며 유지보수가 어려워진다.
 
-What is the difference between import and static import?
-The import allows the java programmer to access classes of a package without package qualification whereas the static import feature allows to access the static members of a class without the class qualification. The import provides accessibility to classes and interface whereas static import provides accessibility to static members of the class.
+* 임포트와 스태틱 임포트의 차이점
+  * 임포트
+    * 프로그래머가 패키지의 경로를 사용하지 않고 해당 패키지의 클래스에 접근할 수 있게 해준다.
+    * 클래스와 인터페이스에 대한 접근성이 제고된다.
+  * 스태틱 임포트
+    * 프로그래머가 클래스명을 사용하지 않고 해당 클래스의 정적 멤버들에 접근할 수 있게 해준다.
+    * 클래스의 정적 멤버들에 대한 접근성이 제고된다.
 
 ### :star:클래스패스
 
