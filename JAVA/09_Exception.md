@@ -28,13 +28,14 @@
 * ... see [reference](https://programming.guide/java/list-of-java-exceptions.html)
 
 #### :mag:Exception vs Error
-* Error(에러)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 없는 심각한 문제를 가진 Condition(상태)를 지칭한다.
+* Error(에러)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 없는 심각한 문제를 가진 Condition(상태)를 지칭한다.  
 에러와 예외는 모두 java.lang.Throwable class를 상속한다. 에러는 예외 처리로는 해결할 수 없는 상태이며 비정상적으로 프로그램이 종료하게 된다. 에러는 unchecked type에 속하며 대부분 런타임에서 발생한다. 대표적인 예로 Out of memory 에러와 System crash 에러가 있다.
 
-* Exceptions(예외)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 있는 문제를 가진 Condition(상태)를 지칭한다.
+* Exceptions(예외)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 있는 문제를 가진 Condition(상태)를 지칭한다.  
 에외는 런타임에서 발생하며 프로그램의 종료를 야기할 수 있으나 try, catch, throw 등의 예외처리 키워드들로 해결할 수 있다. 에외는 두가지 카테고리로 분류되는데, checked 와 unchecked 로 나뉜다. 다음장에서 두가지 분류에 대해 자세히 알아보겠다.
 
 * 에러와 예외의 비교
+
 | Errors(에러)                                                  | Exception(예외)                                                                                                                                     |
 |---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | 핸들링이 불가능하다                                           | try-catch나 throw를 통해 예외 상태를 복구할 수 있다                                                                                                 |
