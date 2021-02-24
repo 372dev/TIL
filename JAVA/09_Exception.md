@@ -29,10 +29,10 @@
 
 #### :mag:Exception vs Error
 * Error(에러)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 없는 심각한 문제를 가진 Condition(상태)를 지칭한다.  
-에러와 예외는 모두 java.lang.Throwable class를 상속한다. 에러는 예외 처리로는 해결할 수 없는 상태이며 비정상적으로 프로그램이 종료하게 된다. 에러는 unchecked type에 속하며 대부분 런타임에서 발생한다. 대표적인 예로 Out of memory 에러와 System crash 에러가 있다.
+에러와 예외는 모두 java.lang.Throwable class를 상속한다. 에러는 예외 처리로는 해결할 수 없는 상태이며, 발생할 경우 비정상적으로 프로그램이 종료하게 된다. 에러는 unchecked type에 속하며 대부분 런타임에서 JVM이나 시스템 문제에 의해 발생한다. 대표적인 예로 StackOverFlow, Out of memory, System crash 등이 있다.
 
 * Exceptions(예외)는 정상적인 애플리케이션에서 Handling(예외 처리) 할 수 있는 문제를 가진 Condition(상태)를 지칭한다.  
-에외는 런타임에서 발생하며 프로그램의 종료를 야기할 수 있으나 try, catch, throw 등의 예외처리 키워드들로 해결할 수 있다. 에외는 두가지 카테고리로 분류되는데, checked 와 unchecked 로 나뉜다. 다음장에서 두가지 분류에 대해 자세히 알아보겠다.
+에외는 런타임에서 발생하며 프로그램의 종료를 야기할 수 있으나 try, catch, throw 등의 예외처리 키워드들을 통해 프로그램 내에서 해결할 수 있다. 에외는 두가지 카테고리로 분류되는데, checked 와 unchecked 로 나뉜다. 다음장에서 두가지 분류에 대해 자세히 알아보겠다.
 
 * 에러와 예외의 비교
 
@@ -159,22 +159,22 @@ public class Main {
 } 
 ```
 
-<b>하지만 위의 예제에서 그렇듯, Unchecked 타입의 예외는 개발자의 실수로 발생한 경우가 많으며 코드의 수정으로 해결되는 경우가 많다. 가능하면 코드 수정을 통해 해결하되, 통제 밖의 상황에서 발생할 수 있는 Uncheck 타입의 예외의 경우, 예외 처리 하는 것은 가능하긴 하다.</b>
+><b>하지만 위의 예제에서 그렇듯, Unchecked 타입의 예외는 개발자의 실수로 발생한 경우가 많으며 코드의 수정으로 해결되는 경우가 많다. 가능하면 코드 수정을 통해 해결하되, 통제 밖의 상황에서 발생할 수 있는 Uncheck 타입의 예외의 경우, 예외 처리 하는 것은 가능하긴 하다.</b>
 
 #### :mag:왜 Checked와 Unchecked 두가지로 예외를 나누어 놨을까?
-Because the Java programming language does not require methods to catch or to specify unchecked exceptions (RuntimeException, Error, and their subclasses), programmers may be tempted to write code that throws only unchecked exceptions or to make all their exception subclasses inherit from RuntimeException. Both of these shortcuts allow programmers to write code without bothering with compiler errors and without bothering to specify or to catch any exceptions. Although this may seem convenient to the programmer, it sidesteps the intent of the catch or specify requirement and can cause problems for others using your classes.
+Unchecked 타입에 속하는 런타임 예외, 에러, 그리고 그들의 하위 클래스들에 대해서 자바는 예외처리를 강제하지 않는다. 프로그래머의 입장에서, Unchecked 타입의 예외와 에러만 발생시키도록 코드를 짜거나, 모든 하위클래스 예외들을 런타임 예외를 상속하도록 만들게 되는 경우 예외처리를 할 필요가 없다. 그 두가지 꼼수를 사용해서 성가신 컴파일러 에러나 귀찮은 예외처리를 피해갈 수 있다. 언뜻 간편한 코딩 방법으로 보일 수 있지만, 이는 예외 처리 기능의 존재 이유에서 벗어나며, 그렇게 작성된 클래스를 다른 사람이 사용할때 문제를 일으킬 수 있다.
 
-Why did the designers decide to force a method to specify all uncaught checked exceptions that can be thrown within its scope? Any Exception that can be thrown by a method is part of the method's public programming interface. Those who call a method must know about the exceptions that a method can throw so that they can decide what to do about them. These exceptions are as much a part of that method's programming interface as its parameters and return value.
+자바를 설계할 때 왜 Checked 예외를 갖는 메서드는 강제적으로 예외처리를 하게 했을까? 메서드로 부터 던져질 수 있는 모든 예외는 해당 메서드의 프로그래밍 인터페이스의 일부이다. 메서드를 호출하는 입장에서는 해당 메서드에서 어떤 예외가 처리될 수 있는지를 알아야 그에 대한 결정을 내릴 수 있다. 메서드의 "예외"는 "변수"나 "리턴값"과 마찬가지로 메서드의 프로그래밍 인터페이스의 일부분이다.
 
-The next question might be: "If it's so good to document a method's API, including the exceptions it can throw, why not specify runtime exceptions too?" Runtime exceptions represent problems that are the result of a programming problem, and as such, the API client code cannot reasonably be expected to recover from them or to handle them in any way. Such problems include arithmetic exceptions, such as dividing by zero; pointer exceptions, such as trying to access an object through a null reference; and indexing exceptions, such as attempting to access an array element through an index that is too large or too small.
+다음으로 떠오르는 질문은, "메서드의 API(application programming interface)에 처리 가능한 예외를 포함해서 작성하는것이 그렇게 중요하다면, 런타임 예외도 작성해야 하는것 아닌가?" 이다. 런타임 예외는 프로그래밍에서 오는 문제에서 발생한다. 그러므로 해당 API의 클라이언트 코드에서 런타임 에러를 해결하거나 예외 처리 하기를 기대하기 어렵다. 예를 들어, 숫자를 0으로 나누려고 시도하여 발생하는 arithmetic exceptions, Null을 통해서 객체에 접근하려 시도하여 발생하는 pointer exceptions, 올바르지 않은 인덱스의 배열에 접근하려 시도하여 발생하는 indexing exceptions등이 있다.
 
-Runtime exceptions can occur anywhere in a program, and in a typical one they can be very numerous. Having to add runtime exceptions in every method declaration would reduce a program's clarity. Thus, the compiler does not require that you catch or specify runtime exceptions (although you can).
+런타임 예외는 프로그램의 어디에서나 발생할 수 있고 얼마든지 많이 발생할 수 있다. 모든 메서드 선언마다 런타임 예외에 대해 예외처리를 해줘야 한다면 프로그램은 너저분해질 수 밖에 없고 역할을 파악하기 어려워 질것이다. 그러므로 런타임 예외를 예외 처리 하는 것이 가능하다고는 하나, 컴파일러가 강제하지는 않는다.
 
-One case where it is common practice to throw a RuntimeException is when the user calls a method incorrectly. For example, a method can check if one of its arguments is incorrectly null. If an argument is null, the method might throw a NullPointerException, which is an unchecked exception.
+관례적으로 런타임 예외를 던지는 경우도 있는데, 사용자가 메서드를 올바르지 않게 호출할 때 이다. 예를 들어, 메서드는 arguments(인자)에 Null 값이 잘못 들어왔는지 확인할 수 있다. Null 값을 가진 인자가 있다면, 메서드는 NullPointerException을 해결하도록 강제한다. 여기에서 NullPointerException은 Unchecked 예외이다.
 
-Generally speaking, do not throw a RuntimeException or create a subclass of RuntimeException simply because you don't want to be bothered with specifying the exceptions your methods can throw.
+대부분의 상황에서, 단순히 예외 처리를 피하려는 목적으로 런타임 예외를 던지거나 상속하면 안된다.
 
-Here's the bottom line guideline: If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+정리해 보자면, 클라이언트가 충분히 처리할 수 있는 예외라면, Checked 예외로 작성하면 된다. 클라이언트가 해결할 수 없는 예외라면, Unchecked 예외로 작성하면 된다.
 
 
 ### :star:자바에서 예외 처리 방법 (try, catch, throw, throws, finally)
