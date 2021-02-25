@@ -176,12 +176,6 @@ Unchecked 타입에 속하는 런타임 예외, 에러, 그리고 그들의 하�
 
 정리해 보자면, 클라이언트가 충분히 처리할 수 있는 예외라면, Checked 예외로 작성하면 된다. 클라이언트가 해결할 수 없는 예외라면, Unchecked 예외로 작성하면 된다.
 
-
-### :star:자바에서 예외 처리 방법 (try, catch, throw, throws, finally)
-
-### :star:커스텀한 예외 만드는 방법
-
-
 -References :
 Java in a Nutshell by Benjamin J.Evans & David Flanagan  
 https://www.javatpoint.com/exception-handling-in-java  
