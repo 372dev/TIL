@@ -5,71 +5,74 @@
 ### :star:자바의 예외 처리 방법
 
 #### :mag:try-catch
+* try 블럭
+자바의 try 코드 블럭은 예외를 발생시킬 가능성이 있는 코드를 담는데 사용되며, 메서드 내부에서 사용된다.
+try 블럭 내부의 특정 구문이 예외를 발생시킬 경우, 블럭 내부의 나머지 코드들은 작동되지 않는다. 그러므로, 예외를 발생시키지 않는 코드는 블럭 내부에 작성하지 않는 것이 좋다.
+try 블럭에는 catch 혹은 finally 블럭이 꼭 뒤따라야 한다.
 
-* try block
-Java try block is used to enclose the code that might throw an exception. It must be used within the method.
+* catch 블럭
+자바의 catch 코드 블럭은 파라미터 범위 안에서 예외의 타입을 선언해주는 방식으로 예외를 처리한다. 예외의 선언은 해당 예외가 상속하는 상위 클래스(Exception 클래스) 혹은 해당 예외를 사용할 수 있으나, 가급적 상세하게 해당 예외를 선언해 주는 것이 좋다.
+catch 블럭은 try 블럭 뒤에 온다. 이 때, 하나의 try 블럭에 여러개의 catch 블럭이 뒤따를 수 있다.
 
-If an exception occurs at the particular statement of try block, the rest of the block code will not execute. So, it is recommended not to keeping the code in try block that will not throw an exception.
+* 다중 catch 블럭
+하나의 try 블럭에 여러개의 catch 블럭이 뒤따를 수 있다. 각각의 catch 블럭은 서로 다른 예외 처리를 담당해야 한다.
+그러므로, 서로 다른 예외 상황에 서로 다른 작업을 명령하고 싶다면 다중 catch 블럭을 사용하면 된다.
+  * 한번에 한가지의 예외만 발생하게 되므로 한번에 한가지의 catch 블럭만 실행될 수 있다.
+  * 모든 catch 블럭은 하위 클래스의 예외에 대한 처리부터 상위 클래스의 예외에 대한 처리의 순서로 정렬되어야 한다. 예를 들어 ArithmeticException의 예외처리는 Exception의 예외처리보다 먼저 와야 한다.
 
-Java try block must be followed by either catch or finally block.
-
-* catch block
-Java catch block is used to handle the Exception by declaring the type of exception within the parameter. The declared exception must be the parent class exception ( i.e., Exception) or the generated exception type. However, the good approach is to declare the generated type of exception.
-
-The catch block must be used after the try block only. You can use multiple catch block with a single try block.
-
-* Multiple Catch Block
-A try block can be followed by one or more catch blocks. Each catch block must contain a different exception handler. So, if you have to perform different tasks at the occurrence of different exceptions, use java multi-catch block.
-  * At a time only one exception occurs and at a time only one catch block is executed.
-  * All catch blocks must be ordered from most specific to most general, i.e. catch for ArithmeticException must come before catch for Exception.
-
-```
-public class MultipleCatchBlock1 {  
+```java
+public class MultipleCatchBlock {  
   
-    public static void main(String[] args) {  
-          
-           try{    
-                int a[]=new int[5];    
-                a[5]=30/0;    
-               }    
-               catch(ArithmeticException e)  
-                  {  
-                   System.out.println("Arithmetic Exception occurs");  
-                  }    
-               catch(ArrayIndexOutOfBoundsException e)  
-                  {  
-                   System.out.println("ArrayIndexOutOfBounds Exception occurs");  
-                  }    
-               catch(Exception e)  
-                  {  
-                   System.out.println("Parent Exception occurs");  
-                  }             
-               System.out.println("rest of the code");    
-    }  
+  public static void main(String[] args) {          
+
+    try{    
+
+      int a[] = new int[5];    
+      a[5] = 30 / 0;
+
+    } catch(ArithmeticException e) {
+
+      System.out.println("Arithmetic Exception 예외 발생.");
+
+    } catch(ArrayIndexOutOfBoundsException e) {
+
+      System.out.println("ArrayIndexOutOfBounds 예외 발생.");  
+
+    } catch(Exception e) {
+
+      System.out.println("Exception 예외 발생.");  
+
+    }
+
+    System.out.println("예외 처리 종료. 다음 코드 수행.");    
+    
+  }  
 }  
 ```
 
-Arithmetic Exception occurs
-rest of the code
+>실행 결과:  
+>Arithmetic Exception 예외 발생.  
+>예외 처리 종료. 다음 코드 수행.  
 
-* Nested Try
-The try block within a try block is known as nested try block in java.
-  * Why use nested try block?
-  Sometimes a situation may arise where a part of a block may cause one error and the entire block itself may cause another error. In such cases, exception handlers have to be nested.
-
+* 중첩 try
+try 블럭 내에 다른 try 블럭이 들어가 있는 경우, 중첩된 try 블럭이라고 한다.
+  * 언제 try 블럭을 중첩해서 사용할까?
+  상황에 따라, 코드 일부가 예외를 발생시킬 가능성이 있고 동시에 블럭 전체가 또 다른 예외를 발생시킬 수 도 있다. 이런 경우 예외처리를 중첩하여 사용한다.
 
 #### :mag:finally
-Java finally block is a block that is used to execute important code such as closing connection, stream etc.
+자바의 finally 코드 블럭은 connection이나 stream을 종료하는 등 중요한 코드를 수행하기 위해서 사용한다.
+finally 블럭은 예외의 처리 여부와 관계 없이 무조건 실행된다.
+finally 블럭은 try나 catch 블럭의 다음에 자리한다.
 
-Java finally block is always executed whether exception is handled or not.
-
-Java finally block follows try or catch block.
-
-* Why use java finally?
-Finally block in java can be used to put "cleanup" code such as closing a file, closing connection etc.
+* 언제 finally 블럭을 사용할까?
+파일을 닫고, connection을 종료하는 등의 cleanup(청소) 코드를 작성할 때 사용한다.
 
 * final vs finally vs finalize
-https://www.javatpoint.com/difference-between-final-finally-and-finalize 테이블 작성
+
+|   | final   | finally   | finalize  |
+|-  |-  |-  |-  |
+| 종류  | 키워드   | 코드 블럭   | 메서드   |
+| 용도  | 클래스나 메서드, 변수 등에 대한 접근 제어를 위해<br>사용된다. final 클래스는 상속되지 못하고, final<br>메서드는 오버라이드 되지 못하며, final 변수는<br>수정이 불가능하다.  | 꼭 실행되어야 하는 중요한 코드를<br>담기 위해 사용된다. 예외 처리<br>여부에 상관없이 실행된다.   | 객체가 garbage collector에<br>의해 제거되기 전에 청소를<br>수행하는 메서드이다.   |
 
 #### :mag:throw
 The Java throw keyword is used to explicitly throw an exception.
@@ -94,29 +97,51 @@ An exception is first thrown from the top of the stack and if it is not caught, 
 Rule: By default Unchecked Exceptions are forwarded in calling chain (propagated).
 Rule: By default, Checked Exceptions are not forwarded in calling chain (propagated).
 
-```
-class TestExceptionPropagation1{  
-  void m(){  
-    int data=50/0;  
+```java
+class TestExceptionPropagation{  
+
+  void m() {  
+
+    int data = 50 / 0;  
+
   }  
-  void n(){  
+
+  void n() {  
+
     m();  
+
   }  
-  void p(){  
-   try{  
-    n();  
-   }catch(Exception e){System.out.println("exception handled");}  
+
+  void p() {  
+
+    try{  
+
+      n();  
+
+    } catch(Exception e) {
+
+      System.out.println("예외 처리.");
+
+    }  
+
   }  
-  public static void main(String args[]){  
+
+  public static void main(String args[]) {  
+
    TestExceptionPropagation1 obj=new TestExceptionPropagation1();  
+
    obj.p();  
-   System.out.println("normal flow...");  
+
+   System.out.println("다음 코드 수행.");  
+
   }  
+
 }  
 ```
 
-Output:exception handled
-       normal flow...
+>실행 결과:  
+>예외 처리.  
+>다음 코드 수행.  
 
 In the above example exception occurs in m() method where it is not handled,so it is propagated to previous n() method where it is not handled, again it is propagated to p() method where exception is handled.
 
