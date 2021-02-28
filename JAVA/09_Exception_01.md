@@ -63,15 +63,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Main {
+
     public static void main(String[] args) {
+
         FileReader file = new FileReader("C:\\test\\text.txt");
         BufferedReader fileInput = new BufferedReader(file);
 
         // "C:\test\text.txt"의 내용을 위에서부터 세줄 출력한다.
-        for (int counter = 0; counter < 3; counter++)
+        for (int counter = 0; counter < 3; counter++) {
             System.out.println(fileInput.readLine());
+            }
 
         fileInput.close();
+
     }
 } 
 ```
@@ -84,15 +88,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Main {
+
     public static void main(String[] args) throws FileNotFoundException {
+
         FileReader file = new FileReader("C:\\test\\text.txt");
         BufferedReader fileInput = new BufferedReader(file);
 
         // "C:\test\text.txt"의 내용을 위에서부터 세줄 출력한다.
-        for (int counter = 0; counter < 3; counter++)
+        for (int counter = 0; counter < 3; counter++) {
             System.out.println(fileInput.readLine());
+            }
 
         fileInput.close();
+
     }
 } 
 ```
@@ -105,15 +113,19 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
+
         FileReader file = new FileReader("C:\\test\\text.txt");
         BufferedReader fileInput = new BufferedReader(file);
 
         // "C:\test\text.txt"의 내용을 위에서부터 세줄 출력한다.
-        for (int counter = 0; counter < 3; counter++)
+        for (int counter = 0; counter < 3; counter++) {
             System.out.println(fileInput.readLine());
+            }
 
         fileInput.close();
+
     }
 } 
 ```
@@ -134,10 +146,13 @@ IOException은 FileNotFoundException의 부모 클래스이므로 IOException에
 
 ```java
 public class Main { 
+
    public static void main(String args[]) { 
+
       int x = 10; 
       int y = 0; 
       int z = x/y; 
+
   } 
 } 
 ```
@@ -146,11 +161,14 @@ Unchecked 타입의 예외도 Checked 타입과 마찬가지로 예외 처리를
 
 ```java
 public class Main {
+
     public static void main(String args[]) {
+
         try {
             int x = 10;
             int y = 0;
             int z = x/y;
+            
         } catch(ArithmeticException e) {
             e.printStackTrace();
             System.out.println("숫자를 0으로 나눌 수 없습니다.");

@@ -26,33 +26,30 @@ public class MultipleCatchBlock {
   public static void main(String[] args) {          
 
     try{    
-
       int a[] = new int[5];    
       a[5] = 30 / 0;
 
     } catch(ArithmeticException e) {
-
       System.out.println("Arithmetic Exception 예외 발생.");
 
     } catch(ArrayIndexOutOfBoundsException e) {
-
       System.out.println("ArrayIndexOutOfBounds 예외 발생.");  
 
     } catch(Exception e) {
-
       System.out.println("Exception 예외 발생.");  
 
     }
 
-    System.out.println("예외 처리 종료. 다음 코드 수행.");    
+    System.out.println("예외 처리 종료. 다음 코드 수행...");    
     
   }  
 }  
 ```
 
->실행 결과:  
+* 실행 결과
+
 >Arithmetic Exception 예외 발생.  
->예외 처리 종료. 다음 코드 수행.  
+>예외 처리 종료. 다음 코드 수행...  
 
 * 중첩 try
 try 블럭 내에 다른 try 블럭이 들어가 있는 경우, 중첩된 try 블럭이라고 한다.
@@ -75,121 +72,131 @@ finally 블럭은 try나 catch 블럭의 다음에 자리한다.
 | 용도  | 클래스나 메서드, 변수 등에 대한 접근 제어를 위해<br>사용된다. final 클래스는 상속되지 못하고, final<br>메서드는 오버라이드 되지 못하며, final 변수는<br>수정이 불가능하다.  | 꼭 실행되어야 하는 중요한 코드를<br>담기 위해 사용된다. 예외 처리<br>여부에 상관없이 실행된다.   | 객체가 garbage collector에<br>의해 제거되기 전에 청소를<br>수행하는 메서드이다.   |
 
 #### :mag:throw
-The Java throw keyword is used to explicitly throw an exception.
+자바의 throw 키워드는 예외를 명시적으로 던지기 위해서 사용된다.
 
-We can throw either checked or uncheked exception in java by throw keyword. The throw keyword is mainly used to throw custom exception. We will see custom exceptions later.
+checked 타입 그리고 uncheked 타입의 예외 모두 throw 키워드를 이요하여 던질 수 있다. 특히나, throw 키워드는 custom exception(커스텀 설정된 예외)를 던지는데 주로 사용된다. custom exception은 뒤에서 살펴보자.
 
 #### :mag:throws
-The Java throws keyword is used to declare an exception. It gives an information to the programmer that there may occur an exception so it is better for the programmer to provide the exception handling code so that normal flow can be maintained.
+자바의 throws 키워드는 예외를 선언하기 위해서 사용된다. 프로그래머가 예외 처리 코드를 작성하여 정상적인 코드 흐름을 유지할 수 있도록 예외 발생의 가능성에 대한 정보를 프로그래머에게 제공한다.
 
-Exception Handling is mainly used to handle the checked exceptions. If there occurs any unchecked exception such as NullPointerException, it is programmers fault that he is not performing check up before the code being used.
-
-* Why use java throws?
-Now Checked Exception can be propagated (forwarded in call stack).
-
-It provides information to the caller of the method about the exception.
+* 언제 throws 키워드를 사용할까?
+throws 키워드를 통해 Checked 타입의 예외를 던질 수 있다(상위 호출 계층으로 전파된다).
+해당 메서드의 호출자에게 예외 정보를 전달한다.
 
 * throw vs throws
-https://www.javatpoint.com/difference-between-throw-and-throws-in-java 테이블 작성
 
-#### :mag:Unchecked 예외를 떠넘기기 (throw 없이)
-An exception is first thrown from the top of the stack and if it is not caught, it drops down the call stack to the previous method,If not caught there, the exception again drops down to the previous method, and so on until they are caught or until they reach the very bottom of the call stack.This is called exception propagation.
-Rule: By default Unchecked Exceptions are forwarded in calling chain (propagated).
-Rule: By default, Checked Exceptions are not forwarded in calling chain (propagated).
+| throw   | throws  |
+|-  |-  |
+| 명시적으로 예외를 던진다   | 예외를 선언한다  |
+| Checked 타입의 예외는 throw 키워드 만으로 전파될 수 없다  | Checked 타입의 예외는 throw 키워드 만으로 전파될 수 있다  |
+| throw 키워드에는 인스턴스가 뒤따른다  | throws 키워드에는 클래스가 뒤따른다  |
+| 메서드 내부에서 사용된다   | 메서드 선언부에 사용된다   |
+| 다수의 예외에 동시에 적용할 수 없다  | 다수의 예외를 동시에 던질 수 있다   |
+
+#### :mag:Unchecked 예외의 전파 (예외를 throws 없이 묵시적으로 던지기)
+예외는 콜 스택의 가장 위에서 부터 던져 지는데, 예외를 받아 처리해주지 않는 경우 콜 스택을 따라 이전 메서드로 전파된다. 마찬가지로 거기에서도 예외가 받아져서 처리되지 않는다면 다시 콜 스택을 따라 이전 메서드로 전파고 이는 예외가 처리되거나 아니면 콜 스택의 끝까지 다다를 때 까지 반복된다. 이를 예외의 전파 라고 한다.
+
+* 예외 전파의 규칙
+  * 기본적으로 Unchecked 타입의 예외는 calling chain(호출 체인)을 따라 forwarded(전달)된다. (전파된다). Checked 타입의 예외는 그렇지 않다.
 
 ```java
 class TestExceptionPropagation{  
 
   void m() {  
-
     int data = 50 / 0;  
-
   }  
 
   void n() {  
-
     m();  
-
   }  
 
   void p() {  
 
     try{  
-
       n();  
 
     } catch(Exception e) {
-
       System.out.println("예외 처리.");
 
     }  
-
   }  
 
   public static void main(String args[]) {  
 
    TestExceptionPropagation1 obj=new TestExceptionPropagation1();  
-
    obj.p();  
-
-   System.out.println("다음 코드 수행.");  
+   System.out.println("다음 코드 수행...");  
 
   }  
-
 }  
 ```
 
->실행 결과:  
+* 실행 결과
+
 >예외 처리.  
->다음 코드 수행.  
+>다음 코드 수행...  
 
-In the above example exception occurs in m() method where it is not handled,so it is propagated to previous n() method where it is not handled, again it is propagated to p() method where exception is handled.
+위의 예에서, m() 메서드에서 예외가 발생한다. 예외 처리가 되지 않았고 이는 콜 스택을 따라 n() 메서드로 전파되었다. 여기에서도 예외 처리는 되지 않았으므로 다시 p() 메서드로 전파된다. p() 메서드에서 마침내 예외 처리가 되었다.
 
-Exception can be handled in any method in call stack either in main() method,p() method,n() method or m() method.
+예외는 콜 스택 중의 어느 메서드에서나 처리가 가능하다. main() 메서드, p() 메서드, n() 메서드, m() 메서드 모두 예외 처리가 가능하다.
 
 #### :mag:메서드 오버라이딩과 예외처리
-There are many rules if we talk about methodoverriding with exception handling. The Rules are as follows:
-* If the superclass method does not declare an exception
-  * If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception but it can declare unchecked exception.
-* If the superclass method declares an exception
-  * If the superclass method declares an exception, subclass overridden method can declare same, subclass exception or no exception but cannot declare parent exception.
+메서드 오버라이딩과 예외처리에 관련해서 몇가지 규칙이 있다.
+
+* 상위 클래스의 메서드가 예외를 선언하지 않는 경우
+  * 하위 클래스의 오버라이드 된 메서드는 checked 타입의 예외를 선언할 수 없다. 그러나 unchecked 타입의 예외는 선언할 수 있다.
+* 상위 클래스의 메서드가 예외를 선언하는 경우
+  * 하위 클래스의 오버라이드 된 메서드는 상위 클래스에서 선언된 예외와 동일한 예외, 혹은 해당 예외를 상속하는 하위 예외를 선언할 수 있다. 그러나 해당 예외 보다 상위 클래스의 예외는 선언할 수 없다.
 
 ### :star:커스텀한 예외 만드는 방법
-If you are creating your own Exception that is known as custom exception or user-defined exception. Java custom exceptions are used to customize the exception according to user need.
+custom exception(커스텀 예외)혹은 user-defined exception(사용자 설정 예외) 라고 알려진 커스텀한 예외를 만들 수 있다. 사용자의 필요에 따라 새로운 예외를 설정하는 것이 가능하다.
+사용자만의 새로운 예외는 규칙 설정, 메세지 설정을 자유롭게 할 수 있다.
 
-By the help of custom exception, you can have your own exception and message.
+아래의 예에서 확인해보자.
 
-Let's see a simple example of java custom exception.
-```
-class InvalidAgeException extends Exception{  
- InvalidAgeException(String s){  
-  super(s);  
+```java
+class InvalidAgeException extends Exception {  
+
+ InvalidAgeException(String s) {  
+  super(s);    
  }  
 }  
 ```
 
-```
-class TestCustomException1{  
+```java
+class TestCustomException{  
   
-   static void validate(int age)throws InvalidAgeException{  
-     if(age<18)  
-      throw new InvalidAgeException("not valid");  
-     else  
-      System.out.println("welcome to vote");  
+   static void validate(int age) throws InvalidAgeException {  
+
+     if(age < 18) {
+      throw new InvalidAgeException("아직 투표할 수 없어요");
+
+      } else {
+        System.out.println("투표할 수 있어요");  
+        
+        }
+
    }  
      
-   public static void main(String args[]){  
-      try{  
+   public static void main(String args[]) {  
+
+      try {  
       validate(13);  
-      }catch(Exception m){System.out.println("Exception occured: "+m);}  
+
+      } catch(Exception m) {
+        System.out.println("예외 발생: " + m );
+
+      }  
   
-      System.out.println("rest of the code...");  
+      System.out.println("다음 코드 수행...");  
   }  
 }  
 ```
 
-Output:Exception occured: InvalidAgeException:not valid
-       rest of the code...
+* 실행 결과
+
+>예외 발생: InvalidAgeException:아직 투표할 수 없어요  
+>다음 코드 수행...  
 
 -References :
 https://www.javatpoint.com/try-catch-block  
