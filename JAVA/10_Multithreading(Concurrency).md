@@ -136,45 +136,110 @@ lock과 monitor의 차이점이 무엇일까?
 | 효율성   | 효율적이다     | 효율적이지 않다  |
 
 #### :mag:Advantages of Java Multithreading(멀티 쓰레딩의 장점)
-Enhanced performance by decreased development time
-Simplified and streamlined program coding
-Improvised GUI responsiveness
-Simultaneous and parallelized occurrence of tasks
-Better use of cache storage by utilization of resources
-Decreased cost of maintenance
-Better use of CPU resource
+* 성능의 향상
+* 간략화 되고 흐름을 볼 수 있는 코딩
+* 동시적이고 병행적인 작업의 수행
+* 향상된 cache 공간 자원 활용
+* 유지보수 비용의 절감
+* 향상된 CPU 자원 활용
 
 #### :mag:Disadvantages of Java Multithreading(멀티 쓰레딩의 단점)
-Complex debugging and testing processes
-Overhead switching of context
-Increased potential for deadlock occurrence
-Increased difficulty level in writing a program
-Unpredictable results
+* 복잡한 디버깅 / 테스팅 절차
+* 작업의 배경에서 Context switch가 요구된다
+  * Context switch? CPU가 한 개의 Task(Process / Thread) 를 실행하고 있는 상태에서 Interrupt 요청에 의해 다른 Task 로 실행이 전환되는 과정에서 기존의 Task 상태 및 Register 값들에 대한 정보 (Context)를 저장하고 새로운 Task 의 Context 정보로 교체하는 작업
+  * see https://jins-dev.tistory.com/entry/컨텍스트-스위치Context-Switching-에-대한-정리
+* deadlock 발생의 가능성이 늘어난다
+* 코드 작성의 난이도가 높아진다
+* 예측하기 어려운 결과물
 
-#### :mag:Java’s threading model is based on three fundamental concepts:
+#### :mag:자바 쓰레딩 모델의 세가지 핵심 컨셉
 
-1. Shared, visible-by-default mutable state
-This means that objects are easily shared between different threads in a process,
-and that they can be changed (“mutated”) by any thread holding a reference to
-them.
+1. 공유되고, 가시적이고, 가변적인 상태
+프로세스가 진행되는 중에 객체들이 여러 쓰레드들에 의해 자유롭게 공유돤다는 것이고, 객체와 연결된 어느 쓰레드에 의해서든 객체가 변화(상태의 변경)될 수 있다는 것이다.
 
-2. Preemptive thread scheduling
-The OS thread scheduler can swap threads on and off cores at more or less any
-time.
+2. 선점적인 쓰레드 스케쥴링
+운영체제의 쓰레드 스케쥴러는 여러 쓰레드들의 작업량과 순서를 마음대로 변경할 수 있다.
 
-3. Object state can only be protected by locks
-Locks can be hard to use correctly, and state is quite vulnerable—even in unex‐
-pected places such as read operations.
+3. lock에 의한 객체의 보호
+lock은 올바르게 사용하기 쉽지 않다. 그리고 lock의 state(상태)는 vulnerable(예민하고 불안정)해서 심지어 read operations(읽어오기 작업)을 할 때에도 주의해야 한다.
 
-Taken together, these three aspects of Java’s approach to concurrency explain why
-multithreaded programming can cause so many headaches for developers.
+이 세가지 동시성 컨셉을 통해서, 멀티 쓰레딩 프로그래밍이 왜 개발자에게 두통을 안겨 주는지 알 수 있다.
 
 ### :star:Thread 클래스
 자바 클래스에 동시성을 부여하기 위해서 가장 먼저 필요한 클래스는 ```java.lang.Thread``` 클래스이다. 이는 자바에서의 모든 동시성 개념의 기반이다.
-https://www.javatpoint.com/creating-thread
+Thread 클래스는 다수의 생성자와 메서드를 제공하며 이는 쓰레드 안에 작업을 생성하고 수행하기 위해 이용된다. Thread 클래스는 Object 클래스를 상속하며 Runnable 인터페이스를 구현한다.
+
+* 흔히 사용되는 Thread 클래스 생성자
+  * Thread()
+  * Thread(String name)
+  * Thread(Runnable r)
+  * Thread(Runnable r,String name)
+
+* 흔히 사용되는 Thread 클래스 메서드
+  * public void run(): is used to perform action for a thread.
+  * public void start(): starts the execution of the thread.JVM calls the run() method on the thread.
+  * public void sleep(long miliseconds): Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds.
+  * public void join(): waits for a thread to die.
+  * public void join(long miliseconds): waits for a thread to die for the specified miliseconds.
+  * public int getPriority(): returns the priority of the thread.
+  * public int setPriority(int priority): changes the priority of the thread.
+  * public String getName(): returns the name of the thread.
+  * public void setName(String name): changes the name of the thread.
+  * public Thread currentThread(): returns the reference of currently executing thread.
+  * public int getId(): returns the id of the thread.
+  * public Thread.State getState(): returns the state of the thread.
+  * public boolean isAlive(): tests if the thread is alive.
+  * public void yield(): causes the currently executing thread object to temporarily pause and allow other threads to execute.
+  * public void suspend(): is used to suspend the thread(depricated).
+  * public void resume(): is used to resume the suspended thread(depricated).
+  * public void stop(): is used to stop the thread(depricated).
+  * public boolean isDaemon(): tests if the thread is a daemon thread.
+  * public void setDaemon(boolean b): marks the thread as daemon or user thread.
+  * public void interrupt(): interrupts the thread.
+  * public boolean isInterrupted(): tests if the thread has been interrupted.
+  * public static boolean interrupted(): tests if the current thread has been interrupted.
 
 #### :mag:Thread safety
-https://howtodoinjava.com/java/multi-threading/what-is-thread-safety/
+Thread safety(쓰레드 안전성)이 무엇인지 설명하는 것은 정말 어렵다. 구글에서 검색을 해봐도 아래와 비슷한 수많은 "정의"들이 나온다.
+
+1. Thread-safe code(쓰레드 세이프 코드)는 여러 쓰레드가 동시에 해당 작업을 하더라도 작동하는 데에 문제가 없는 코드이다.
+2. A piece of code is thread-safe if it only manipulates shared data structures in a manner that guarantees safe execution by multiple threads at the same time.
+
+이외에도 비슷한 정의가 많이 검색된다.
+
+Don’t you think that definitions like above actually does not communicate anything meaningful and even add some more confusion. Though these definitions can’t be ruled out just like that, because they are not wrong. But the fact is they do not provide any practical help or perspective. How do we make a difference between a thread-safe class and an unsafe one? What do we even mean by “safe”?
+
+##### What is Correctness in thread safety?
+
+At the heart of any reasonable definition of thread safety is the concept of correctness. So, before understanding the thread-safety we should understand first, this “correctness“.
+
+>Correctness means that a class conforms to its specification.
+
+You will agree that a good class specification will have all information about a class’s state at any given time and it’s post condition if some operation is performed on it. Since we often don’t write adequate specifications for our classes, how can we possibly know they are correct? We can’t, but that doesn’t stop us from using them anyway once we’ve convinced ourselves that “the code works”. This “code confidence” is about as close as many of us get to correctness.
+
+Having optimistically defined “correctness” as something that can be recognized, we can now define thread safety in a somewhat less circular way: a class is thread-safe when it continues to behave correctly when accessed from multiple threads.
+
+>A class is thread-safe if it behaves correctly when accessed from multiple threads, regardless of the scheduling or interleaving of the execution of those threads by the runtime environment, and with no additional synchronization or other coordination on the part of the calling code.
+
+If the loose use of “correctness” here bothers you, you may prefer to think of a thread-safe class as one that is no more broken in a concurrent environment than in a single-threaded environment. Thread-safe classes encapsulate any needed synchronization so that clients need not provide their own.
+
+##### Example: A Stateless Servlet
+
+A good example of thread safe class is java servlets which have no fields and references, no fields from other classes etc. They are stateless.
+
+```java
+public class StatelessFactorizer implements Servlet {
+    public void service(ServletRequest req, ServletResponse resp) {
+        BigInteger i = extractFromRequest(req);
+        BigInteger[] factors = factor(i);
+        encodeIntoResponse(resp, factors);
+    }
+}
+```
+
+The transient state for a particular computation exists solely in local variables that are stored on the thread’s stack and are accessible only to the executing thread. One thread accessing a StatelessFactorizer cannot influence the result of another thread accessing the same StatelessFactorizer; because the two threads do not share state, it is as if they were accessing different instances. Since the actions of a thread accessing a stateless object cannot affect the correctness of operations in other threads, stateless objects are thread-safe.
+
+That’s all for this small but important concept around What is Thread Safety?
 
 ### :star:Runnable 인터페이스
 자바의 동시성에서 Thread 클래스 다음으로 알아야 할 것은 ```java.lang.Runnable``` 인터페이스이다.
@@ -221,3 +286,6 @@ https://www.geeksforgeeks.org/difference-between-multiprocessing-and-multithread
 https://www.javatpoint.com/multiprogramming-vs-multiprocessing-vs-multitasking-vs-multithreading  
 https://java2blog.com/object-level-locking-vs-class-level-locking-java/  
 https://www.multisoftvirtualacademy.com/blog/common-advantages-and-disadvantages-of-multithreading-in-java/  
+https://jins-dev.tistory.com/entry/컨텍스트-스위치Context-Switching-에-대한-정리  
+https://www.javatpoint.com/creating-thread  
+https://howtodoinjava.com/java/multi-threading/what-is-thread-safety/  
