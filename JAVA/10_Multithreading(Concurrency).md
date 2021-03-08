@@ -202,30 +202,30 @@ Thread 클래스는 다수의 생성자와 메서드를 제공하며 이는 쓰�
 #### :mag:Thread safety
 Thread safety(쓰레드 안전성)이 무엇인지 설명하는 것은 정말 어렵다. 구글에서 검색을 해봐도 아래와 비슷한 수많은 "정의"들이 나온다.
 
-1. Thread-safe code(쓰레드 세이프 코드)는 여러 쓰레드가 동시에 해당 작업을 하더라도 작동하는 데에 문제가 없는 코드이다.
-2. A piece of code is thread-safe if it only manipulates shared data structures in a manner that guarantees safe execution by multiple threads at the same time.
+1. Thread-safe code(쓰레드 세이프 코드)는 여러 쓰레드가 동시에 해당 작업을 하더라도 문제 없이 작동하는 코드이다.
+2. 공유되는 data structures(자료 구조)에 대해 여러 쓰레드로부터 동시에 접근이 이루어져도 프로그램의 실행에 문제가 없음을 뜻한다.
 
 이외에도 비슷한 정의가 많이 검색된다.
 
-Don’t you think that definitions like above actually does not communicate anything meaningful and even add some more confusion. Though these definitions can’t be ruled out just like that, because they are not wrong. But the fact is they do not provide any practical help or perspective. How do we make a difference between a thread-safe class and an unsafe one? What do we even mean by “safe”?
+위와 같은 정의들은 사실 핵심적인 의미를 담지 못하고 있다고 생각되지 않은가? 틀린 말은 아니기에 이런 정의들이 필요 없다고 할 수는 없지만, 실용적인 도움이나 의미있는 관점을 제공하지 못하는게 사실이다. thread-safe class(쓰레드 세이프한 클래스)와 안전하지 않은 것의 차이는 무엇인가? "safe(안전)"하다는게 무슨 의미인가?
 
-##### What is Correctness in thread safety?
+##### thread safety에서의 Correctness(올바름)이란?
 
-At the heart of any reasonable definition of thread safety is the concept of correctness. So, before understanding the thread-safety we should understand first, this “correctness“.
+Thread safety에 대한 설명의 중심에는 correctness(올바름)이라는 컨셉이 있다. 그러므로 thread safety를 정의하기 전에 나는 먼저 "올바름"이 무엇인지 알아야 한다.
 
->Correctness means that a class conforms to its specification.
+>Correctness(올바름)은 class가 스스로의 specification(규격/명세)를 준수하는 것이다.
 
-You will agree that a good class specification will have all information about a class’s state at any given time and it’s post condition if some operation is performed on it. Since we often don’t write adequate specifications for our classes, how can we possibly know they are correct? We can’t, but that doesn’t stop us from using them anyway once we’ve convinced ourselves that “the code works”. This “code confidence” is about as close as many of us get to correctness.
+잘 작성된 class specification(클래스 명세)는 클래스의 변경되는 상태에 대한 모든 정보를 담고 있어야 하며, 기능을 수행한 이후의 상태에 대한 정보도 가지고 있어야 한다. 나는 명세에 대한 개념이 부족하며 정확하게 클래스의 명세를 작성하지 않는데, 명세가 정확한지 아닌지 알 수나 있을까? 알 수 없지만 그렇다고 해서 클래스를 사용하지 않을 수는 없다. 일단 코드가 문제 없이 작동한다고 생각되면 올바르다고 생각한다. 이 "자신감"이 내 수준에서 "올바름"에 그나마 근접할 수 있는 것이다.
 
-Having optimistically defined “correctness” as something that can be recognized, we can now define thread safety in a somewhat less circular way: a class is thread-safe when it continues to behave correctly when accessed from multiple threads.
+"올바름"이 무엇인지 그나마 이해할 수 있는 수준에서 정의해 보았으니 이제 thread safety를 조금이라도 더 또렷하게 정의해보자.
 
->A class is thread-safe if it behaves correctly when accessed from multiple threads, regardless of the scheduling or interleaving of the execution of those threads by the runtime environment, and with no additional synchronization or other coordination on the part of the calling code.
+>클래스는 (런타임 환경에서 스케쥴링이 이뤄지고 쓰레드 순서가 바뀌는 것과 상관 없이, 그리고 코드가 호출될 때 추가적인 동기화나 조율이 필요 없이) 여러 개의 쓰레드가 동시에 접근해도 정상적으로 작동한다면, thread-safe 하다.
 
-If the loose use of “correctness” here bothers you, you may prefer to think of a thread-safe class as one that is no more broken in a concurrent environment than in a single-threaded environment. Thread-safe classes encapsulate any needed synchronization so that clients need not provide their own.
+여기에 정의된 "올바름"이 너무 두루뭉술하다고 느껴진다면, 그 대신 "thread safe한 클래스는 멀티 쓰레딩 환경에서 작업을 해도 싱글 쓰레딩 환경에서 작업을 하는 것과 차이가 없는 클래스이다" 라고 생각해도 괜찮다. Thread safe인 클래스들은 동기화 작업을 캡슐화 하기 떄문에 클라이언트는 직접 동기화 작업을 할 필요가 없다.
 
-##### Example: A Stateless Servlet
+##### 예제, A Stateless Servlet
 
-A good example of thread safe class is java servlets which have no fields and references, no fields from other classes etc. They are stateless.
+thread safe인 클래스의 좋은 예는 필드값, 다른 클래스의 필드값, 참조변수 등이 없는 Stateless 서블릿이다.
 
 ```java
 public class StatelessFactorizer implements Servlet {
@@ -237,13 +237,29 @@ public class StatelessFactorizer implements Servlet {
 }
 ```
 
-The transient state for a particular computation exists solely in local variables that are stored on the thread’s stack and are accessible only to the executing thread. One thread accessing a StatelessFactorizer cannot influence the result of another thread accessing the same StatelessFactorizer; because the two threads do not share state, it is as if they were accessing different instances. Since the actions of a thread accessing a stateless object cannot affect the correctness of operations in other threads, stateless objects are thread-safe.
-
-That’s all for this small but important concept around What is Thread Safety?
+특정 연산에서의 임시적인 상태는 해당 쓰레드의 스택에 있는 로컬 변수에만 존재한다. 그리고 작업중인 쓰레드에 의해서만 접근이 가능하다. ```StatelessFactorizer``` 클래스에서 작업중인 하나의 쓰레드는 동일한 ```StatelessFactorizer``` 클래스에서 작업하는 다른 쓰레드의 결과물에 영향을 주지 못한다. 이는 두개의 다른 쓰레드가 서로 상태를 공유하지 않기 떄문이다. 마치 서로 다른 인스턴스에서 작업하는 것 마냥 행동한다. stateless인 객체에 접근한 쓰레드의 작업이 다른 쓰레드의 작업에 대한 "올바름"에 영향을 주지 못하기 때문에, stateless 객체는 thread safe 하다.
 
 ### :star:Runnable 인터페이스
 자바의 동시성에서 Thread 클래스 다음으로 알아야 할 것은 ```java.lang.Runnable``` 인터페이스이다.
-https://www.javatpoint.com/runnable-interface-in-java
+
+Java runnable is an interface used to execute code on a concurrent thread. It is an interface which is implemented by any class if we want that the instances of that class should be executed by a thread.
+
+The runnable interface has an undefined method run() with void as return type, and it takes in no arguments
+
+* public void run() : This method takes in no arguments. When the object of a class implementing Runnable class is used to create a thread, then the run method is invoked in the thread which executes separately.
+
+The runnable interface provides a standard set of rules for the instances of classes which wish to execute code when they are active. The most common use case of the Runnable interface is when we want only to override the run method. When a thread is started by the object of any class which is implementing Runnable, then it invokes the run method in the separately executing thread.
+
+A class that implements Runnable runs on a different thread without subclassing Thread as it instantiates a Thread instance and passes itself in as the target. This becomes important as classes should not be subclassed unless there is an intention of modifying or enhancing the fundamental behavior of the class.
+
+Runnable class is extensively used in network programming as each thread represents a separate flow of control. Also in multi-threaded programming, Runnable class is used. This interface is present in java.lang package.
+
+#### :mag:Runnable의 구현
+It is the easiest way to create a thread by implementing Runnable. One can create a thread on any object by implementing Runnable. To implement a Runnable, one has only to implement the run method.
+
+public void run()
+
+In this method, we have the code which we want to execute on a concurrent thread. In this method, we can use variables, instantiate classes, and perform an action like the same way the main thread does. The thread remains until the return of this method. The run method establishes an entry point to a new thread.
 
 #### :mag:Process vs Thread
 https://www.geeksforgeeks.org/difference-between-process-and-thread/
@@ -273,8 +289,9 @@ https://www.javatpoint.com/synchronization-in-java
 
 
 
-### :star:데드락
+### :star:Deadlock(교착상태)
 https://www.javatpoint.com/deadlock-in-java
+https://rightnowdo.tistory.com/entry/JAVA-concurrent-programming-교착상태Dead-Lock
 
 -References :
 Java in a Nutshell by Benjamin J.Evans & David Flanagan  
@@ -289,3 +306,4 @@ https://www.multisoftvirtualacademy.com/blog/common-advantages-and-disadvantages
 https://jins-dev.tistory.com/entry/컨텍스트-스위치Context-Switching-에-대한-정리  
 https://www.javatpoint.com/creating-thread  
 https://howtodoinjava.com/java/multi-threading/what-is-thread-safety/  
+https://www.javatpoint.com/runnable-interface-in-java  
