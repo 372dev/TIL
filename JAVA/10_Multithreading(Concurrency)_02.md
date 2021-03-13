@@ -85,29 +85,27 @@ public class LambdaExampleClass {
 Runnable은 코드를 더욱 유연하게 만든다. Thread 클래스를 상속하면 코드는 쓰레드 안에서만 존재하겠지만 Runnable의 경우 다양한 서비스를 활용하거나, 싱글-쓰레드 환경에서의 사용도 가능하다. 유지보수도 비교적 수월하다.
 
 ### :star:쓰레드의 상태 (라이프 사이클)
-A thread can be in one of the five states. According to sun, there is only 4 states in thread life cycle in java new, runnable, non-runnable and terminated. There is no running state.
+쓰레드의 상태는 다섯가지로 나뉜다. 다만 sun에 의하면, 자바 쓰레드의 life cycle에는 네가지 상태만 존재하며 이는 new, runnable, non-runnable, terminated 이다. running은 인정되지 않는다.
 
-But for better understanding the threads, we are explaining it in the 5 states.
-
-The life cycle of the thread in java is controlled by JVM. The java thread states are as follows:
+그러나 쓰레드에 대한 이해도를 높이기 위해서 여기서는 다섯가지 상태로 나누어 학습해보자. 쓰레드의 상태는 JVM에 의해서 통제 된다. 다섯가지 상태는 아래와 같다.
 
 1. New
-The thread is in new state if you create an instance of Thread class but before the invocation of start() method.
+start() 메서드가 실행되기 전에 쓰레드 클래스의 인스턴스만 생성된 상태이면 쓰레드가 new 상태에 있다고 할 수 있다.
 
 2. Runnable
-The thread is in runnable state after invocation of start() method, but the thread scheduler has not selected it to be the running thread.
+start() 메서드의 실행 이후에 쓰레드는 runnable 상태가 된다. 그러나 쓰레드 스케쥴러는 아직 해당 쓰레드를 running 쓰레드가 되도록 선택하지 않은 상태이다.
 
 3. Running
-The thread is in running state if the thread scheduler has selected it.
+쓰레드 스케쥴러가 해당 쓰레드를 선택하면 running 상태가 된다.
 
 4. Non-Runnable (Blocked)
-This is the state when the thread is still alive, but is currently not eligible to run.
+쓰레드가 아직 살아있지만 작동하지 못하는 상태를 non-runnable이라고 한다.
 
 5. Terminated
-A thread is in terminated or dead state when its run() method exits.
+run() 메서드가 종료되면 해당 쓰레드는 terminated 혹은 dead 상태가 된다. 
 
-* Can we start a thread twice?
-No. After starting a thread, it can never be started again. If you does so, an IllegalThreadStateException is thrown. In such case, thread will run once but for second time, it will throw exception.
+* 쓰레드를 두번 실행할 수 있을까?
+불가능하다. 한번 실행된 쓰레드는 다시 실행될 수 없다. 이미 실행된 쓰레드를 다시 실행하려 시도할 경우, IllegalThreadStateException이 발생한다. 그런 경우, 쓰레드는 처음 실행에서 정상적으로 작동하지만 두번째 실행 시도에서 예외를 던진다.
 
 ### :star:쓰레드의 우선순위
 Each thread have a priority. Priorities are represented by a number between 1 and 10. In most cases, thread schedular schedules the threads according to their priority (known as preemptive scheduling). But it is not guaranteed because it depends on JVM specification that which scheduling it chooses.
