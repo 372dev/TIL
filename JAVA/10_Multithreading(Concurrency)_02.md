@@ -107,42 +107,52 @@ run() 메서드가 종료되면 해당 쓰레드는 terminated 혹은 dead 상�
 * 쓰레드를 두번 실행할 수 있을까?
 불가능하다. 한번 실행된 쓰레드는 다시 실행될 수 없다. 이미 실행된 쓰레드를 다시 실행하려 시도할 경우, IllegalThreadStateException이 발생한다. 그런 경우, 쓰레드는 처음 실행에서 정상적으로 작동하지만 두번째 실행 시도에서 예외를 던진다.
 
-### :star:쓰레드의 우선순위
-Each thread have a priority. Priorities are represented by a number between 1 and 10. In most cases, thread schedular schedules the threads according to their priority (known as preemptive scheduling). But it is not guaranteed because it depends on JVM specification that which scheduling it chooses.
-3 constants defined in Thread class:
+### :star:쓰레드의 우선 순위
+각가의 쓰레드는 우선 순위를 갖는다. 그 우선 순위는 1에서 10까지의 숫자중 하나로 부여 받는데, 대부분의 경우에 쓰레드 스케쥴러가 정한다 (이를 preemptive scheduling 원시적 스케쥴링 이라 한다). 그러나 이 방식의 스케쥴링이 항상 보장되는 것은 아닌데 이는 원시적 스케쥴링이 JVM 설정에 의존적이기 때문이다.
+
+* Thread class에 정의된 3 가지 상수
+
+```java
 public static int MIN_PRIORITY
 public static int NORM_PRIORITY
 public static int MAX_PRIORITY
-Default priority of a thread is 5 (NORM_PRIORITY). The value of MIN_PRIORITY is 1 and the value of MAX_PRIORITY is 10.
+```
 
-Example of priority of a Thread:
-class TestMultiPriority1 extends Thread{  
- public void run(){  
-   System.out.println("running thread name is:"+Thread.currentThread().getName());  
-   System.out.println("running thread priority is:"+Thread.currentThread().getPriority());  
-  
+쓰레드의 우선 순위 기본값은 5이다 (NORM_PRIORITY). MIN_PRIORITY 의 값은 1 이고 MAX_PRIORITY 의 값은 10이다.
+
+* 예제
+
+```java
+class TestThreadPriority extends Thread {  
+  public void run() {
+    System.out.println("실행중인 쓰레드의 이름 : " + Thread.currentThread().getName());
+    System.out.println("실행중인 쓰레드의 우선 순위 : " + Thread.currentThread().getPriority());  
+  }
+
+  public static void main(String args[]) {
+    TestThreadPriority t1 = new TestThreadPriority();  
+    TestThreadPriority t2 = new TestThreadPriority();  
+    t1.setPriority(Thread.MIN_PRIORITY);  
+    t2.setPriority(Thread.MAX_PRIORITY);  
+    t1.start();
+    t2.start();
   }  
- public static void main(String args[]){  
-  TestMultiPriority1 m1=new TestMultiPriority1();  
-  TestMultiPriority1 m2=new TestMultiPriority1();  
-  m1.setPriority(Thread.MIN_PRIORITY);  
-  m2.setPriority(Thread.MAX_PRIORITY);  
-  m1.start();  
-  m2.start();  
-   
- }  
 }     
+```
+
+* 실행 결과
+
+>실행중인 쓰레드의 이름 : Thread-0  
+>실행중인 쓰레드의 우선 순위 : 10  
+>실행중인 쓰레드의 이름 : Thread-1  
+>실행중인 쓰레드의 우선 순위 : 1  
 
 
-Output:running thread name is:Thread-0
-       running thread priority is:10
-       running thread name is:Thread-1
-       running thread priority is:1
+* 사용자 정의 쓰레드 우선 순위
 
-* User define Priority Thread
+>t1.setPriority(4);  
+>t2.setPriority(7);  
 
-  t1.setPriority(4);
-  t2.setPriority(7);
 
 #### :mag:thread scheduler
 https://www.javatpoint.com/thread-scheduler-in-java
