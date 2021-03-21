@@ -108,7 +108,7 @@ run() 메서드가 종료되면 해당 쓰레드는 terminated 혹은 dead 상�
 불가능하다. 한번 실행된 쓰레드는 다시 실행될 수 없다. 이미 실행된 쓰레드를 다시 실행하려 시도할 경우, IllegalThreadStateException이 발생한다. 그런 경우, 쓰레드는 처음 실행에서 정상적으로 작동하지만 두번째 실행 시도에서 예외를 던진다.
 
 ### :star:쓰레드의 우선 순위
-각가의 쓰레드는 우선 순위를 갖는다. 그 우선 순위는 1에서 10까지의 숫자중 하나로 부여 받는데, 대부분의 경우에 쓰레드 스케쥴러가 정한다 (이를 preemptive scheduling 원시적 스케쥴링 이라 한다). 그러나 이 방식의 스케쥴링이 항상 보장되는 것은 아닌데 이는 원시적 스케쥴링이 JVM 설정에 의존적이기 때문이다.
+각가의 쓰레드는 우선 순위를 갖는다. 그 우선 순위는 1에서 10까지의 숫자중 하나로 부여 받는데, 대부분의 경우에 쓰레드 스케쥴러가 정한다 (이를 preemptive scheduling 선점적 스케쥴링 이라 한다). 그러나 이 방식의 스케쥴링이 항상 보장되는 것은 아닌데 이는 선점적 스케쥴링이 JVM 설정에 의존적이기 때문이다.
 
 * Thread class에 정의된 3 가지 상수
 
@@ -147,23 +147,58 @@ class TestThreadPriority extends Thread {
 >실행중인 쓰레드의 이름 : Thread-1  
 >실행중인 쓰레드의 우선 순위 : 1  
 
-
 * 사용자 정의 쓰레드 우선 순위
 
 >t1.setPriority(4);  
 >t2.setPriority(7);  
 
-
 #### :mag:thread scheduler
-https://www.javatpoint.com/thread-scheduler-in-java
+자바의 쓰레드 스케쥴러는 어떤 쓰레드가 먼저 작동해야 하는지 결정하는 기능을 하며 JVM의 일부분이다. 쓰레드 스케쥴러에 의해 어떤 러너블 쓰레드가 선택되고 먼저 실행될 지 알 수 없다. 다만 하나의 프로세스에서 한개의 쓰레드만 작동이 가능하다. 쓰레드 스케쥴러는 쓰레드의 순서를 정하기 위해 preemptive scheduling(선점적 스케쥴링) 혹은 time slicing(우선완료순 스케쥴링)을 이용한다.
+
+* 선점적 스케쥴링과 우선완료순 스케쥴링의 차이가 무엇인지 가볍게 알아보자
+  * 선점적 스케쥴링 - 가장 높은 우선순위의 업무가 먼저 처리되며 해당 업무가 대기 상태에 들어가거나 완료가 되어야만 다음 우선순위의 업무가 처리된다. 다만 업무 처리 중에 더 높은 우선순위의 업무가 나타나면 더 높은 우선순위의 업무를 먼저 수행한다.
+  * 타임 슬라이싱 - 우선순위의 업무가 정해진 짧은 시간동안 처리되다가 다시 업무 풀로 돌아간다. 다음 처리할 업무를 결정해야 하는데, 무조건 우선순위의 업무만 처리하는 것이 아니라 처리 시간이 짧은 다른 업무도 돌아가면서 처리한다. 우선순위의 업무가 우선적으로 처리되지만 금방 처리를 완료할 수 있는 다른 업무에게도 기회가 돌아가게 된다.
 
 ### :star:Main 쓰레드
-https://www.geeksforgeeks.org/main-thread-java/
+자바 프로그램이 실행될 때, 쓰레드 하나가 곧바로 실행된다. 이 쓰레드는 보통 프로그램의 메인 쓰레드라고 불려진다.
+
+* 특성
+  * 다른 "자식" 쓰레드들이 갈라져 나오는 "부모" 쓰레드이다.
+  * 다양한 shutdown actions(종료 작업)을 수행하기 떄문에 종종 가장 마지막에 실행을 마치게 된다.
+
+* 다이어그램
+![Thread_Diagram](https://raw.githubusercontent.com/372dev/TIL/main/JAVA/img/10_Multithreading_Thread_Diagram.jpg)
+
+프로그램이 실행됨과 동시에 자바 메인 쓰레드가 시작된다. 메인 쓰레드를 사용하기 위해서는 reference가 필요하다. 레퍼런스를 얻기 위해 Thread 클래스에 있는 currentThread() 메서드를 사용할 수 있다. 이 메서드는 자기가 호출된 쓰레드에 대한 reference를 리턴한다. 메인 쓰레드의 우선순위 기본값은 5 이다. 우선순위 값은 자녀 쓰레드로 상속되기 때문에 유저가 생성한 쓰레드들도 이 기본값을 갖게 된다.
+
+* main() 메서드와 메인 쓰레드와의 관계
+각각의 프로그램에서 JVM은 메인 쓰레드를 생성한다. 메인 쓰레드가 가장 먼저 하는 것은 main() 메서드를 찾는 것이다. 그 이후에 쓰레드는 클래스를 초기화한다. 참고로 JDK 6 부터 독립 어플리케이션에 main() 메서드는 필수이다.
+
+#### :mag:Daemon 쓰레드
+옥스포드 사전에서 Daemon을 찾아보면, 악마라는 첫번째 사전적 의미 말고 두번째 사전적 의미(컴퓨팅에서의 의미)가 있고 이는 "a background process that handles requests for services such as print spooling and file transfers, and is dormant when not required." 이라고 설명되어 있다. 우리가 흔히 데몬툴이라고 하며 많이 사용하는 유틸리티 들에서 사용하는 개념은 "파일의 전송이나 프린트 스풀링(*프린트 속도와 컴퓨터 속도의 차이를 중재하기 위해 프린트할 자료를 기기로 전송받아 두고 작업하는 것*) 등의 요청을 처리하며 요구되지 않을 시 수면상태가 되는 백그라운드 프로세스" 라고 할 수 있겠다. 디먼 쓰레드도 이와 같은 역할을 할까?
+
+자바 디먼 쓰레드가 무엇인가 하는 질문에 대하여 전능하신 스택 오버플로우의 b_erb님이 답변해주시고 Gray님이 수정해주신 내용을 간추리면 다음과 같다.
+
+>디먼 쓰레드는 프로그램이 종료되더라도 계속 필요한 업무를 수행하는 쓰레드이다. 프로그램이 명시적으로 JVM을 종료시키지 않는 이상, JVM은 프로그램 종료 후 디먼 쓰레드가 작업을 마치길 기다렸다가 종료된다. 디먼 쓰레드의 예를 들자면 가비지 컬렉터가 있다. 특정 쓰레드 실행 이전에 setDaemon(boolean) 메서드를 이용하면 해당 쓰레드를 디먼 쓰레드로 설정할 수 있다.
+
+출처 : https://stackoverflow.com/questions/2213340/what-is-a-daemon-thread-in-java
+
+Daemon thread in java is a service provider thread that provides services to the user thread. Its life depend on the mercy of user threads i.e. when all the user threads dies, JVM terminates this thread automatically.
+
+There are many java daemon threads running automatically e.g. gc, finalizer etc.
+
+You can see all the detail by typing the jconsole in the command prompt. The jconsole tool provides information about the loaded classes, memory usage, running threads etc.
+
+* Points to remember for Daemon Thread in Java
+  * It provides services to user threads for background supporting tasks. It has no role in life than to serve user threads.
+  * Its life depends on user threads.
+  * It is a low priority thread.
+
+* Why JVM terminates the daemon thread if there is no user thread?
+The sole purpose of the daemon thread is that it provides services to user thread for background supporting task. If there is no user thread, why should JVM keep running this thread. That is why JVM terminates the daemon thread if there is no user thread.
 
 #### :mag:sleep 메서드
 https://www.javatpoint.com/sleep()-method
-
-#### :mag:Daemon 쓰레드
 
 ### :star:Synchronization
 https://www.javatpoint.com/synchronization-in-java
@@ -173,8 +208,6 @@ https://www.javatpoint.com/synchronization-in-java
 #### :mag:Compare-And-Swap
 
 #### :mag:Volatile
-
-
 
 ### :star:Deadlock(교착상태)
 https://www.javatpoint.com/deadlock-in-java
@@ -187,3 +220,7 @@ https://www.javatpoint.com/life-cycle-of-a-thread
 https://www.javatpoint.com/can-we-start-a-thread-twice  
 https://www.javatpoint.com/priority-of-a-thread  
 https://www.javatpoint.com/java-thread-setpriority-method  
+https://www.javatpoint.com/thread-scheduler-in-java  
+https://www.geeksforgeeks.org/main-thread-java/  
+https://stackoverflow.com/questions/2213340/what-is-a-daemon-thread-in-java  
+https://www.javatpoint.com/daemon-thread  
