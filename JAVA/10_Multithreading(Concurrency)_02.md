@@ -179,38 +179,46 @@ class TestThreadPriority extends Thread {
 
 자바 디먼 쓰레드가 무엇인가 하는 질문에 대하여 전능하신 스택 오버플로우의 b_erb님이 답변해주시고 Gray님이 수정해주신 내용을 간추리면 다음과 같다.
 
->디먼 쓰레드는 프로그램이 종료되더라도 계속 필요한 업무를 수행하는 쓰레드이다. 프로그램이 명시적으로 JVM을 종료시키지 않는 이상, JVM은 프로그램 종료 후 디먼 쓰레드가 작업을 마치길 기다렸다가 종료된다. 디먼 쓰레드의 예를 들자면 가비지 컬렉터가 있다. 특정 쓰레드 실행 이전에 setDaemon(boolean) 메서드를 이용하면 해당 쓰레드를 디먼 쓰레드로 설정할 수 있다.
-
+>디먼 쓰레드는 프로그램이 종료되더라도 계속 필요한 업무를 수행하는 쓰레드이다. 프로그램이 명시적으로 JVM을 종료시키지 않는 이상, JVM은 프로그램 종료 후 디먼 쓰레드가 작업을 마치길 기다렸다가 종료된다. 디먼 쓰레드의 예를 들자면 가비지 컬렉터가 있다. 특정 쓰레드 실행 이전에 setDaemon(boolean) 메서드를 이용하면 해당 쓰레드를 디먼 쓰레드로 설정할 수 있다.  
 출처 : https://stackoverflow.com/questions/2213340/what-is-a-daemon-thread-in-java
 
-Daemon thread in java is a service provider thread that provides services to the user thread. Its life depend on the mercy of user threads i.e. when all the user threads dies, JVM terminates this thread automatically.
+자바의 디먼 쓰레드는 유저 쓰레드에게 서비스를 제공하는 쓰레드이다. 이에 따라 디먼 쓰레드의 라이프 사이클은 유저 쓰레드를 따라 간다. 예를 들어, 모든 유저 쓰레드가 종료된 경우 JVM이 디먼 쓰레드를 종료시킨다.
 
-There are many java daemon threads running automatically e.g. gc, finalizer etc.
+자바는 자동으로 시작되고 돌아가는 디먼 쓰레드를 여러가지 갖고 있다. 앞서 언급된 가비지 컬렉터 외에도 finalizer 등이 있다.
 
-You can see all the detail by typing the jconsole in the command prompt. The jconsole tool provides information about the loaded classes, memory usage, running threads etc.
+CMD에서 jconsole을 입력하면 상세한 내용을 볼 수 있다. jconsole 툴은 현재 불러와져 있는 클래스, 메모리 사용, 실행중인 쓰레드 등을 보여준다. - 한번 실행해 봤는데 어째 접속에 실패했다. 다음에 다시 시도해보자.
 
-* Points to remember for Daemon Thread in Java
-  * It provides services to user threads for background supporting tasks. It has no role in life than to serve user threads.
-  * Its life depends on user threads.
-  * It is a low priority thread.
+* 디먼 쓰레드에 대해 기억할 점 몇가지
+  * 디먼 쓰레드는 유저 쓰레드에 대해 서포터의 역할을 한다. 그 외의 목적은 없다.
+  * 디먼 쓰레드의 라이프 사이클은 결국 유저 쓰레드의 라이프 사이클에 의해 결정된다.
+  * 우선순위가 낮은 쓰레드이다.
 
-* Why JVM terminates the daemon thread if there is no user thread?
-The sole purpose of the daemon thread is that it provides services to user thread for background supporting task. If there is no user thread, why should JVM keep running this thread. That is why JVM terminates the daemon thread if there is no user thread.
+* 유저 쓰레드가 없을 때 JVM이 디먼 쓰레드를 종료시키는 이유?
+디먼 쓰레드의 유일한 역할은 유저 쓰레드에 대한 서포팅이다. 유저 쓰레드가 더이상 없다면 JVM이 디먼 쓰레드를 계속해서 실행할 이유가 없다.
 
 #### :mag:sleep 메서드
-https://www.javatpoint.com/sleep()-method
+Thread 클래스의 sleep() 메서드는 어느 쓰레드를 특정 시간동안 수면 상태로 만든다.
 
-### :star:Synchronization
-https://www.javatpoint.com/synchronization-in-java
-
-#### :mag:Atomic
+* sleep() 메서드 신택스
+  1.
+  ```java
+  public static void sleep(long miliseconds) throws InterruptedException
+  ```  
+  2.
+  ```java
+  public static void sleep(long miliseconds, int nanos) throws InterruptedException
+  ```  
 
 #### :mag:Compare-And-Swap
+Compare and swap은 동시성을 가진 알고리즘을 설계할 때 사용하는 테크닉이다. 기본적으로, compare and swap은 변수의 expected value(예상값)과 concrete value(확정값)을 비교한 뒤 두 값이 같은 경우 변수의 값을 새로운 변수로 교환한다. Compare and swap에 대한 설명은 언뜻 복잡하게 들릴 수 있는데, 일단 이해하고 나면 간단한 컨셉이다.
 
 #### :mag:Volatile
+자바의 volatile 키워드는 변수를 "메인 메모리에 보관된다"고 표시하기 위해 사용된다. 더 자세히 말하자면, volatile 변수는 CPU 캐쉬가 아니라 컴퓨터의 메인 메모리가 읽고 쓰게 된다.
 
 ### :star:Deadlock(교착상태)
-https://www.javatpoint.com/deadlock-in-java
+Deadlock(교착상태)는 두개 이상의 쓰레드가 lock을 얻기 위해 blocked 상태로 대기하고 있는데 해당 락을 교착상태의 다른 쓰레드가 들고있는 상태이다. 하나의 락을 여러개의 쓰레드가 필요로 하고, 동시에 접근하나 서로 다른 순서로 얻어가는 상황에서 발생할 수 있다.
+
+더 자세히 알아보기 위해 아래 글도 살펴보자.
 https://rightnowdo.tistory.com/entry/JAVA-concurrent-programming-교착상태Dead-Lock
 
 -References :
@@ -224,3 +232,7 @@ https://www.javatpoint.com/thread-scheduler-in-java
 https://www.geeksforgeeks.org/main-thread-java/  
 https://stackoverflow.com/questions/2213340/what-is-a-daemon-thread-in-java  
 https://www.javatpoint.com/daemon-thread  
+https://www.javatpoint.com/sleep()-method  
+http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html  
+http://tutorials.jenkov.com/java-concurrency/volatile.html  
+http://tutorials.jenkov.com/java-concurrency/deadlock.html  

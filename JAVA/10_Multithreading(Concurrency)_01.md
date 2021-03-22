@@ -119,6 +119,10 @@ lock과 monitor의 차이점이 무엇일까?
 | Interruption in locked    | 불가능   | 가능    |
 | Lock 접근 스레드 정보    | 미제공   | 제공    |
 
+#### :mag:Atomic Variables
+간략하게 말하자면, shared mutable state(공유되는 유동적 상태)는 동시성과 관련하여 문제를 일으키기 쉽다. 공유되는 유동적 상태에 대해 접근이 제대로 통제되지 않는 경우, 어플리케이션은 찾기 어려운 동시성 에러에 아주 취약한 상태가 된다.
+lock을 통해 동시성 접근을 통제할 수 있는데, 이는 장단점을 지니며, 이에 대한 대안으로 Atomic Variables가 있다. 다음에 다시 자세하게 알아보자.
+
 ### :star:자바의 쓰레딩 모델
 자바의 멀티 쓰레딩은 다수의 쓰레드를 동시에 실행하는 과정이다. 
 
@@ -244,10 +248,11 @@ Java in a Nutshell by Benjamin J.Evans & David Flanagan
 https://www.javatpoint.com/multithreading-in-java  
 https://howtodoinjava.com/java-concurrency-tutorial/  
 https://www.geeksforgeeks.org/object-level-class-level-lock-java/  
+https://java2blog.com/object-level-locking-vs-class-level-locking-java/  
+https://www.baeldung.com/java-atomic-variables  
 https://bestugi.tistory.com/40  
 https://www.geeksforgeeks.org/difference-between-multiprocessing-and-multithreading/  
 https://www.javatpoint.com/multiprogramming-vs-multiprocessing-vs-multitasking-vs-multithreading  
-https://java2blog.com/object-level-locking-vs-class-level-locking-java/  
 https://www.multisoftvirtualacademy.com/blog/common-advantages-and-disadvantages-of-multithreading-in-java/  
 https://jins-dev.tistory.com/entry/컨텍스트-스위치Context-Switching-에-대한-정리  
 https://www.javatpoint.com/creating-thread  
