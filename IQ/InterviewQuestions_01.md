@@ -3,8 +3,16 @@
 
 ## 면접 질문 01
 
-### 객체지향, 함수형 프로그래밍?
-객체지향 프로그래밍은 말 그대로 객체에 기반하여 프로그래밍 하며 캡슐화, 추상화, 상속, 다형성 등 ...
+### 프로그래밍 패러다임
+https://hackr.io/blog/programming-paradigms  
+* 절차지향 프로그래밍
+
+* 
+
+객체지향 프로그래밍은 객체 중심적 사고, 그리고 함수형 프로그래밍은 명령 중심적 사고를 합니다.
+
+객체지향 프로그래밍은 프로그램의 상호작용을 표현하며 객체에 기반하여 캡슐화, 추상화, 상속, 다형성 등 특징을 가집니다.
+
 
 함수형 프로그래밍은 순수 함수들로 프로그래밍 하며 불변의 데이터, 투명성, ...
 상태의 변화를 피하고... 같은 값을 입력받은 함수는 항상 같은 값을 도출해야 한다...
@@ -15,8 +23,27 @@
 함수형 프로그래밍의 구문은 아무런 순서로 실행되어도 상관 없으나 객체지향 프로그래밍 구문에는 순서가 있다.
 함수형 프로그래밍의 핵심 요소는 변수와 함수이다. 객체지향 프로그래밍의 핵심 요소는 객체와 메서드이다.
 
-### DBMS는 무엇?
+함수형 언어같아 보이는 자바스크립트에도 프로토타입이라는 객체가 있고, 객체지향 언어같아 보이는 자바에도 람다식이 있습니다.
 
+### DBMS는 무엇?
+데이터베이스를 만들고, 다수의 사용자가 DB의 데이터에 접근, 저장 및 관리할 수 있는 기능들을 제공하는 도구.
+기존의 파일 시스템이 갖는 데이터 종속성과 중복성의 문제를 해결하기 위해 제안된 시스템.
+중복 제어, 접근 통제, 관계 표현, 제약 조건 등의 기능을 갖고 있다.
+오라클 DB, MySQL, Microsoft SQL, PostgreSQL, MongoDB 등이 있고
+대부분 DB SQL을 이용하나 MongoDB처럼 일부 NoSQL DB도 있다.
+
+* SQL?
+Structured Query Language, 구조화 질의어, DBMS의 데이터 관리를 위해서 설계된 언어이다.
+문법은 크게 세가지로 나뉜다. 정의(DDL), 조작(DML), 제어(DCL).
+  * DDL - CREAT, DROP, ALTER
+  * DML - INSERT, UPDATE, DELETE, SELECT
+  * DCL - COMMIT, ROLLBACK, SAVEPOINT
+
+* NoSQL DB 종류
+1. Document Store, Document Database
+2. Wide Column Store, Wide Column Database
+3. Key Value Store, Key Balue Database
+4. Graph Database
 
 ### Servlet과 JSP의 차이
 
