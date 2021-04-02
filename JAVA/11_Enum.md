@@ -68,19 +68,37 @@ public enum RegularPolygon {
 enum 인스턴스들이 자바 런타임에서 생성되고, 외부에서 인스턴스화 될 수 없으므로 생성자들은 private으로 선언된다.
 
 ### :star:enum 메서드 - values() & valueOf()
--Original Text [Baeldung - Attaching Values to Java Enum](https://www.baeldung.com/java-enum-values)  
+아래는 Baeldung의 enum 활용에 대한 글의 번역이다.
+-원문(Original Text) : [Baeldung - Attaching Values to Java Enum](https://www.baeldung.com/java-enum-values)  
+
 #### :mag:1. 개요
 The Java enum type provides a language-supported way to create and use constant values. By defining a finite set of values, the enum is more type safe than constant literal variables like String or int.
 
 However, enum values are required to be valid identifiers, and we're encouraged to use SCREAMING_SNAKE_CASE by convention.
 
 Given those limitations, the enum value alone is not suitable for human-readable strings or non-string values.
-#### :mag:2. Enum을 클래스로 사용하기
-#### :mag:3. 생성자와 Final 필드 추가하기
-#### :mag:4. 개요
-#### :mag:5. 개요
-#### :mag:
 
+#### :mag:2. Enum을 클래스로 사용하기
+We often create an enum as a simple list of values. For example, here are the first two rows of the periodic table as a simple enum:
+
+```java
+public enum Element {
+    H, HE, LI, BE, B, C, N, O, F, NE
+}
+```
+
+Using the syntax above, we've created ten static, final instances of the enum named Element. While this is very efficient, we have only captured the element symbols. And while the uppercase form is appropriate for Java constants, it's not how we normally write the symbols.
+
+Furthermore, we're also missing other properties of the periodic table elements, like the name and atomic weight.
+
+*Although the enum type has special behavior in Java, we can add constructors, fields and methods as we do with other classes. Because of this, we can enhance our enum to include the values we need.*
+
+#### :mag:3. 생성자와 Final 필드 추가하기
+#### :mag:4. Enum 값 불러오기
+#### :mag:5. 캐시 이용하기
+#### :mag:6. 다양한 값을 부여하기
+#### :mag:7. 인터페이스를 다루기
+#### :mag:8. 결론
 
 #### :mag:custom enum methods
 https://www.baeldung.com/a-guide-to-java-enums
