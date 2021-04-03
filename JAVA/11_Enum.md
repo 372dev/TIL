@@ -19,7 +19,7 @@ PrimaryColor 타입의 인스턴스들은 이제 static 필드의 값처럼 참�
 >PrimaryColor.GREEN  
 >PrimaryColor.BLUE  
 
-* C++와 같은 다른 언어에서는 enum의 역할을 constant integer로 제공한다. 하지만 자바의 enum이 더 좋은 type safety와 유동성을 제공한다.
+* C++와 같은 다른 언어에서는 enum의 역할을 constant integer와 같은 방식으로 제공한다. 하지만 자바의 enum은 더욱 탁월한 type safety(타입 안전성)과 유동성을 제공한다.
 
 * enum의 특성
   * 모든 enum은 java.lang.Enum을 상속한다
@@ -68,15 +68,15 @@ public enum RegularPolygon {
 enum 인스턴스들이 자바 런타임에서 생성되고, 외부에서 인스턴스화 될 수 없으므로 생성자들은 private으로 선언된다.
 
 ### :star:enum 메서드 - values() & valueOf()
-아래는 Baeldung의 enum 활용에 대한 글의 번역이다.
+아래는 Baeldung.com의 enum에 대한 글의 번역이다.
 -원문(Original Text) : [Baeldung - Attaching Values to Java Enum](https://www.baeldung.com/java-enum-values)  
 
 #### :mag:1. 개요
-The Java enum type provides a language-supported way to create and use constant values. By defining a finite set of values, the enum is more type safe than constant literal variables like String or int.
+enum 타입을 통해 자바 언어는 상수 값을 생성하고 사용하는 방법을 제공한다. 한정된 숫자의 변수를 정의함으로서 enum은 String이나 int 같은 constant literal variables(리터럴 상수)보다 더욱 안정적인 타입이다.
 
-However, enum values are required to be valid identifiers, and we're encouraged to use SCREAMING_SNAKE_CASE by convention.
+유의할 점은, enum의 변수는 유효한 구분자로 이름지어져야 하며, 관습에 따라 SCREAMING_SNAKE_CASE(대문자 스네이크 케이스)를 사용할 것이 권장된다.
 
-Given those limitations, the enum value alone is not suitable for human-readable strings or non-string values.
+그러한 제약 사항들을 고려하면, enum 변수만 가지고는 가독성 있는 문자열이나 문자열 외의 값을 저장하기에 부족함이 있다.
 
 #### :mag:2. Enum을 클래스로 사용하기
 We often create an enum as a simple list of values. For example, here are the first two rows of the periodic table as a simple enum:
