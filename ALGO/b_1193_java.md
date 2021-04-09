@@ -18,8 +18,8 @@ public class Main {
         while(true) {
             int currRowMax = prevRowsSum + currRow;
             if(a <= currRowMax) {
-                int x = (currRow - (currRowMax - a));
-                int y = (1 + (currRowMax - a));
+                int x = a - prevRowsSum;
+                int y = (currRowMax - a) + 1;
                 if(currRow % 2 == 0) {
                     System.out.println(x + "/" + y);
                     break;
