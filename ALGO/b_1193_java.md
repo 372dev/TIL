@@ -2,7 +2,7 @@
 * ALGO : 바로 해결하지 못하고 검색해본 알고리즘 또는 해결했지만 더 좋은 방법들이 있었던 알고리즘의 기록을 남깁니다.
 
 ## 분수찾기
-![1193](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1193.jpg)
+![1193](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1193.JPG)
 
 ## 성공
 ```java
