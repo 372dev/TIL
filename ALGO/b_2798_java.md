@@ -2,7 +2,7 @@
 * ALGO : 바로 해결하지 못하고 검색해본 알고리즘 또는 해결했지만 더 좋은 방법들이 있었던 알고리즘의 기록을 남깁니다.
 
 ## 블랙잭
-![2798](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_2798.jpg)
+![2798](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_2798.JPG)
 
 ## 첫번째 시도
 ```java
