@@ -2,13 +2,13 @@
 * ALGO : 바로 해결하지 못하고 검색해본 알고리즘 또는 해결했지만 더 좋은 방법들이 있었던 알고리즘의 기록을 남깁니다.
 
 ## 2진수 8진수
-![1373](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1373.jpg)
+![1373](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1373.JPG)
 
 * 입력 조건에서 수의 길이가 최대 1,000,000이므로 숫자형 변수는 사용할 수 없고 문자열로 받아와야 한다. int는 -2,147,483,648 에서 2,147,483,647 사이의 값을 담을 수 있고, String의 경우 2,147,483,647개의 문자를 담을 수 있다.
 
 * 8은 2의 3승이므로 3비트 2진수는 8진수로, 그 반대로도 표현이 가능하다. 아래 나온 풀이 방식들 모두 이 방법을 사용한다.
 
-![1373_2](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1373_2.jpg)
+![1373_2](https://raw.githubusercontent.com/372dev/TIL/main/ALGO/img/b_1373_2.JPG)
 
 * 다만 한번에 해결하지 못하고 아래 링크를 참고하여 풀었다.
 
