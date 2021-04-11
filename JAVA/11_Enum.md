@@ -130,19 +130,18 @@ public enum Element {
 System.out.println(HE.label);
 ```
 
-물론 field를 private으로 선언하는 것도 가능하다, 그런 경우 필드에 getLabel() 메서드를 통해 접근할 수 있다. 예제를 간결하게 보여주기 위해서 이 글에서는 계속하여 public 필드 스타일을 사용해보자.
+물론 field를 private으로 선언하는 것도 가능하다, 그런 경우 필드에 getLabel() 메서드를 통해 접근할 수 있다. 이 글에서는, 예제를 간결하게 보여주기 위하여 계속해서 public 필드 스타일을 사용해보자.
 
 #### :mag:4. Enum 값 불러오기
-Java provides a valueOf(String) method for all enum types.
+자바는 모든 enum 타입에서 valueOf(String) 메서드를 제공한다.
 
-Thus, we can always get an enum value based on the declared name:
+그러므로 우리는 언제든지 enum의 값을 선언된 이름을 통해 가져올 수 있다.
 
 ```java
 assertSame(Element.LI, Element.valueOf("LI"));
 ```
 
-However, we may want to look up an enum value by our label field as well.
-To do that, we can add a static method:
+하지만 label 필드를 통해서 값을 가져오고 싶을 수도 있다. 그러기 위해서는 아래와 같은 static 메서드를 추가할 수 있겠다.
 
 ```java
 public static Element valueOfLabel(String label) {
@@ -155,24 +154,158 @@ public static Element valueOfLabel(String label) {
 }
 ```
 
-The static valueOfLabel() method iterates the Element values until it finds a match. It returns null if no match is found. Conversely, an exception could be thrown instead of returning null.
+위의 valueOfLabel()이라는 static 메서드는 반복문을 통해 요소의 값을 매개변수와 비교한다. 조건에 맞는 값을 찾은 경우 해당 요소를 리턴해 주고 반복문을 종료한다. 조건에 맞는 값을 찾지 못한 경우 null을 리턴한다. null을 리턴하는 대신 예외처리를 해둘 수도 있다.
 
-Let's see a quick example using our valueOfLabel() method:
+아래와 같이 위 메서드를 호출하는 코드를 작성할 수 있겠다.
 
 ```java
 assertSame(Element.LI, Element.valueOfLabel("Lithium"));
 ```
 
 #### :mag:5. 캐시 이용하기
-#### :mag:6. 다양한 값을 부여하기
-#### :mag:7. 인터페이스를 다루기
-#### :mag:8. 결론
+*We can avoid iterating the enum values by using a Map to cache the labels.*
 
-#### :mag:custom enum methods
-https://www.baeldung.com/a-guide-to-java-enums
+To do this, we define a static final Map and populate it when the class loads:
+
+```java
+public enum Element {
+
+    // ... enum values
+
+    private static final Map<String, Element> BY_LABEL = new HashMap<>();
+    
+    static {
+        for (Element e: values()) {
+            BY_LABEL.put(e.label, e);
+        }
+    }
+
+   // ... fields, constructor, methods
+
+    public static Element valueOfLabel(String label) {
+        return BY_LABEL.get(label);
+    }
+}
+```
+
+*As a result of being cached, the enum values are iterated only once,* and the valueOfLabel() method is simplified.
+
+As an alternative, we can lazily construct the cache when it is first accessed in the valueOfLabel() method. In that case, map access must be synchronized to prevent concurrency problems.
+
+#### :mag:6. 다양한 값을 부여하기
+*The Enum constructor can accept multiple values.*
+
+To illustrate, let's add the atomic number as an int and the atomic weight as a float:
+
+```java
+public enum Element {
+    H("Hydrogen", 1, 1.008f),
+    HE("Helium", 2, 4.0026f),
+    // ...
+    NE("Neon", 10, 20.180f);
+
+    private static final Map<String, Element> BY_LABEL = new HashMap<>();
+    private static final Map<Integer, Element> BY_ATOMIC_NUMBER = new HashMap<>();
+    private static final Map<Float, Element> BY_ATOMIC_WEIGHT = new HashMap<>();
+    
+    static {
+        for (Element e : values()) {
+            BY_LABEL.put(e.label, e);
+            BY_ATOMIC_NUMBER.put(e.atomicNumber, e);
+            BY_ATOMIC_WEIGHT.put(e.atomicWeight, e);
+        }
+    }
+
+    public final String label;
+    public final int atomicNumber;
+    public final float atomicWeight;
+
+    private Element(String label, int atomicNumber, float atomicWeight) {
+        this.label = label;
+        this.atomicNumber = atomicNumber;
+        this.atomicWeight = atomicWeight;
+    }
+
+    public static Element valueOfLabel(String label) {
+        return BY_LABEL.get(label);
+    }
+
+    public static Element valueOfAtomicNumber(int number) {
+        return BY_ATOMIC_NUMBER.get(number);
+    }
+
+    public static Element valueOfAtomicWeight(float weight) {
+        return BY_ATOMIC_WEIGHT.get(weight);
+    }
+}
+```
+
+Similarly, we can add any values we want to the enum, such as the proper case symbols, “He”, “Li” and “Be”, for example.
+
+Moreover, we can add computed values to our enum by adding methods to perform operations.
+
+#### :mag:7. 인터페이스를 다루기
+As a result of adding fields and methods to our enum, we've changed its public interface. Therefore our code, which uses the core Enum name() and valueOf() methods, will be unaware of our new fields.
+
+*The static valueOf() method is already defined for us by the Java language, so we can't provide our own valueOf() implementation.*
+
+Similarly, *because the Enum.name() method is final, we can't override it either.*
+
+As a result, there's no practical way to utilize our extra fields using the standard Enum API. Instead, let's look at some different ways to expose our fields.
+
+##### 7.1. toString() 메서드 오버라이드
+Overriding toString() may be an alternative to overriding name():
+
+```java
+@Override 
+public String toString() { 
+    return this.label; 
+}
+```
+
+By default, Enum.toString() returns the same value as Enum.name().
+
+##### 7.2. 인터페이스 구현
+*The enum type in Java can implement interfaces.* While this approach is not as generic as the Enum API, interfaces do help us generalize.
+
+Let's consider this interface:
+
+```java
+public interface Labeled {
+    String label();
+}
+```
+
+For consistency with the Enum.name() method, our label() method does not have a get prefix.
+
+And because the valueOfLabel() method is static, we do not include it in our interface.
+
+Finally, we can implement the interface in our enum:
+
+```java
+public enum Element implements Labeled {
+
+    // ...
+
+    @Override
+    public String label() {
+        return label;
+    }
+
+    // ...
+}
+```
+
+One benefit of this approach is that the Labeled interface can be applied to any class, not just enum types. Instead of relying on the generic Enum API, we now have a more context-specific API.
+
+#### :mag:8. 결론
+In this article, we've explored many features of the Java Enum implementation. By adding constructors, fields and methods, we see that the enum can do a lot more than literal constants.
+
+As always, the full source code for this article can be found over on [깃허브](https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-lang-oop-types).
 
 ### :star:java.lang.Enum
 https://www.geeksforgeeks.org/java-lang-enum-class-java/
+
 ### :star:EnumSet
 https://www.baeldung.com/java-enumset
 
