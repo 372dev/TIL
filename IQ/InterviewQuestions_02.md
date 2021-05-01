@@ -23,19 +23,3 @@
 ### Session / Cookie / Cache?
 
 ### XML / JSON / YAML은 무엇?
-
-
-
-... model에서 controller로 어떻게 데이터가 뿌려지나?
-
-
-... Spring
-
-... 왜 스프링?
-객체의 관계를 주입해주는 Dependency Injection 이랑 Transaction Management
-
-... 어노테이션 차이
-@Component	스프링의 모든 컴포넌트(객체)의 기본적인 타입
-@Repository	파일, DB 등 영속성 레이어의 타입
-@Service	서비스 레이어의 타입
-@Controller	뷰에 전달된 요청과 응답을 처리하는 프레젠테이션 레이어의 타입
