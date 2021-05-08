@@ -57,7 +57,6 @@ Structured Query Language, 구조화 질의어, RDBMS의 데이터 관리를 위
 
 ### 라이브러리와 프레임워크는 무엇?
 
-
 ### Spring은 무엇?
 
 ### MyBatis는 무엇?

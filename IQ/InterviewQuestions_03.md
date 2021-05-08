@@ -35,6 +35,8 @@ SUM, AVG, MIN, MAX, COUNT, GROUP BY, HAVING
 
 ### 데이터와 정보의 차이?
 
-...ui/ux
+...ui? ux?
 
-...
+...== 동등연산자 === 일치연산자
+
+...네이밍 케이스 종류
