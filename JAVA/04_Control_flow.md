@@ -1,14 +1,12 @@
 # Java_04_Control_flow
 
-## :muscle:분기문
+## :muscle:분기문(Control flow)  
 
-### :star:조건문/선택문 (Control flow)  
-
-#### :mag:조건문(if / if...else statement)  
+### :star:조건문(if / if...else statement)  
 
 우리는 살아가며 종종 상황을 보고 그 상황에 맞게 결정을 내려야 할 때가 있습니다. 예를 들어, 비가 오고 있다면 우산을 챙겨야 하고 하늘이 맑다면 우산을 챙기지 않습니다. 같은 판단의 과정을 통해 어떤 정수가 2로 나눠진다면 우린 그 숫자가 짝수라고 할 수 있고 2로 나눠지지 않는다면 홀수라고 결론지을 수 있습니다.  
 
-1. if statement  
+#### :mag:if statement  
 
 다시 우산의 예를 들어봅시다.  
 
@@ -47,7 +45,7 @@ public void method1() {
 }
 ```  
 
-2. if...else statement  
+#### :mag:if...else statement  
 
 위에서 if 구문이 조건의 결과 참/거짓에 따라 참일 경우에 코드블럭을 실행하는 것을 확인했습니다. 여기에 else를 덧붙이면 if 구문의 조건 결과가 거짓일 경우에 실행할 코드블럭을 추가할 수 있습니다.  
 
@@ -91,7 +89,7 @@ public void method1() {
 }
 ```  
 
-3. if...else if...else statement  
+#### :mag:if...else if...else statement  
 
 먼저 살펴본 if...else 구문을 중첩해서 사용할 수 있습니다.  
 
@@ -124,7 +122,7 @@ if(temperature <= 0) {
 }
 ```  
 
-#### :mag:선택문(switch statement)
+### :star:선택문(switch statement)
 
 앞서 살펴본 조건문의 경우, 한가지 조건의 참/거짓 여부에 따라 실행할 코드블럭을 각각 작성합니다. 하지만 우리가 살아가며 둘중 하나의 조건만 주어지는게 아니라 여러가지 선택이 주어질 때가 있습니다. if...else 구문을 중첩시켜서 다중 구문으로 이를 표현할 수 있겠지만 그보다 더 효율적일 수 있는 방법으로 선택문이 있습니다.  
 
@@ -182,13 +180,13 @@ switch(num) {
 [https://www.codesdope.com/java-decide-if-or-else/](https://www.codesdope.com/java-decide-if-or-else/)  
 [https://devqa.io/java-if-else-switch-statements/](https://devqa.io/java-if-else-switch-statements/)  
 
-### :star:반복문 (Iteration)
+### :star:반복문(Iteration)
 
 루프(loop)라고 불리우는 반복문들은 어느 프로그래밍 언어에서나 기능을 반복적으로 수행하기 위해 사용됩니다. 자바에는 세가지 종류의 루프가 있는데 먼저 표를 보며 이 세가지를 비교해보고 시작하겠습니다.  
 
 ![whiteship04_7](https://raw.githubusercontent.com/372dev/372dev.github.io/master/_posts/imgs/whiteship04_7.PNG)  
 
-1. while statement
+#### :mag:while statement
 While 구문은 자바의 가장 기본적인 반복문이다. 기본적인 신택스는 다음과 같다.  
 
 >while (조건식) {  
@@ -213,7 +211,7 @@ while (count < 10) {
 
 위와 같이 count라는 변수가 0으로 시작되고 while 루프가 반복되는 동안 매번 1씩 증가한다. 루프가 10번 반복되고 나면 조건식은 false(10보다 작지 않기 때문에)가 되며 while 구문은 종료된다. 반복문이 종료되고 나서야 인터프리터는 다음 코드로 넘어갈 수 있다. 반복문은 이렇듯 카운터의 역할을 하는 변수를 갖는 경우가 많다. 카운터의 변수명은 i, j, k의 순으로 주로 쓰이며 의미를 가진 변수명을 사용하는 것 또한 좋다.  
 
-2. do...while statement
+#### :mag:do...while statement
 
 do...while 구문은 while 구문과 비슷하다. 다만, 조건의 확인이 반복문 실행 후에 이루어진다는 차이가 있다. 때문에 조건의 확인 이전에 무조건 한번은 구문을 실행하게 된다. 신택스는 다음과 같다.
 
@@ -235,7 +233,7 @@ do {
 
 do...while 구문은 while 구문에 비해 자주 쓰이지 않는다. 그 이유는 실무에서 반복문을 조건과 관계 없이 무조건 한번 실행해야 할 경우가 그리 많지 않기 때문이다.  
 
-3. for statement
+#### :mag:for statement
 
 for 구문은 while 구문이나 do while 구문보다 사용하기 편리한 면이 있다. for 구문은 일반적이고 자주 사용되는 반복 구조를 활용한다. 반복이 실행되기 전에 먼저 카운터의 역할을 할 변수가 지정되고, 이 카운터의 크기가 조건에 부합하는지 확인한 이후에
 코드가 실행되고, 마지막에 카운터의 크기가 주어진 규칙에 따라 증감된다. 카운터의 초기화, 조건 확인, 증감식 까지 이 세가지가 for 구문의 핵심 요소이다. 이 세 요소가 반복문의 조건을 명확하게 표현하게 된다.  
