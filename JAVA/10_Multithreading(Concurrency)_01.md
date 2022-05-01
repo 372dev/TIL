@@ -1,4 +1,4 @@
-# Java_10_Multithreading(Concurrency)
+# Java_10_Multithreading(Concurrency)_01
 
 ## :muscle:Multithreading in Java(자바의 멀티 쓰레딩) / Concurrency(동시성)
 자바는 Multithread language(멀티 쓰레딩 언어)이다. 멀티 쓰레딩이라, 그러면 싱글 쓰레딩 언어도 있을까? 싱글 쓰레딩 언어도 있는데, Python이나 JavaScript가 이에 속한다. 여기서는 자바의 멀티 쓰레딩이 무엇인지 살펴보자.

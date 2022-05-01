@@ -1,6 +1,4 @@
-# Java_10_Multithreading(Concurrency)
-
-## :muscle:Multithreading in Java(자바의 멀티 쓰레딩) / Concurrency(동시성)
+# Java_10_Multithreading(Concurrency)_02
 
 ### :star:Runnable 인터페이스
 자바의 동시성에서 Thread 클래스 다음으로 알아야 할 것은 ```java.lang.Runnable``` 인터페이스이다.

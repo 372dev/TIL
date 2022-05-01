@@ -1,4 +1,4 @@
-# Java_09_Exception
+# Java_09_Exception_01
 
 ## :muscle:Exception Handling(예외 처리)
 * Exception(예외)란 무엇일까? 사전적인 의미로 Abnormal condition(비정상적인 상태)를 말한다. 자바에서의 예외는 장상적인 프로그램의 흐름을 방해하는 상황이다.

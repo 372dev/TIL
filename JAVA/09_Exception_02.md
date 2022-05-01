@@ -1,7 +1,5 @@
 # Java_09_Exception_02
 
-## :muscle:Exception Handling(예외 처리)
-
 ### :star:자바의 예외 처리 방법
 
 #### :mag:try-catch
