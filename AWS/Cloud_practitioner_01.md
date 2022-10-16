@@ -77,4 +77,4 @@
   * ap-southeast-2c
 * Each availability zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity
 
-- Study note reference : [Ultimate AWS Certified Cloud Practitioner by Stephane Maarek](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)
+- Study note reference : Udemy course [Ultimate AWS Certified Cloud Practitioner](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)  by Stephane Maarek
