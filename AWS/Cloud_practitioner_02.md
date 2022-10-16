@@ -20,7 +20,7 @@
 
 ### Policies structure
 * Consists of
-  * Version: policy language version, always include "2012-10-17"
+  * Version: policy language version, always include "2012-10-17" or an older version "2008-10-17" which lacks some of the newer features.
   * Id: an identifier for the policy (optiional)
   * Statement: one or more individual statements (required)
 * Statements consists of
@@ -65,4 +65,4 @@
 * Alternative to using AWS Management Console
 
 
-- Study note reference : [Ultimate AWS Certified Cloud Practitioner by Stephane Maarek](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/)
+- Study note reference : Udemy course [Ultimate AWS Certified Cloud Practitioner](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/) by Stephane Maarek
