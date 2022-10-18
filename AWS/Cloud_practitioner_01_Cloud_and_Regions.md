@@ -1,4 +1,4 @@
-# AWS Cloud practitioner 01
+# AWS Cloud practitioner 01 Cloud and Regions
 
 ## Ultimate AWS Certified Cloud Practitioner by Stephane Maarek - study note 01
 
