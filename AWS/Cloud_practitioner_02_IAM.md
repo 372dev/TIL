@@ -64,7 +64,7 @@
 * A tool that enables you to interact with AWS services using commands in you command-line shell
 * Direct access to the public APIs of AWS services
 * You can develop scripts to manage your resources
-* It's open-source https://github.com/aws/aws-cli
+* It's an open-source(https://github.com/aws/aws-cli)
 * Alternative to using AWS Management Console
 
 ### What's the AWS SDK?
@@ -101,7 +101,7 @@
 * To do so, we will assign permissions to AWS services with IAM Roles
 * Common roles
   * EC2 Instance Roles
-  * Lambad Function Roles
+  * Lambda Function Roles
   * Roles for CloudFormation
 
 ### IAM Security Tools
