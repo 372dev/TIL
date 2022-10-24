@@ -40,7 +40,6 @@
   * m: instance class
   * 5: generation (AWS improves them over time)
   * 2xlarge: size within the instance class
-* 
 
 ### EC2 Instance Types - General Purpose
 * Great for diversity of workloads such as web servers or code repositories
@@ -138,7 +137,7 @@
 
 * Convertible Reserved Instance
   * Can change the EC2 instance type, instance family, OS, scope and tenancy
-  * Up to 66& discount
+  * Up to 66% discount
 
 ### EC2 Savings Plans
 * Get a discount based on long-term usage (up to 72% - same as RIs)
