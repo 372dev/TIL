@@ -21,7 +21,7 @@
 ### Policies structure
 * Consists of
   * Version: policy language version, always include "2012-10-17" or an older version "2008-10-17" which lacks some of the newer features.
-  * Id: an identifier for the policy (optiional)
+  * Id: an identifier for the policy (optional)
   * Statement: one or more individual statements (required)
 * Statements consists of
   * Sid: an identifier for the statement (optional)
