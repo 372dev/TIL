@@ -150,7 +150,7 @@
   * OS (e.g., Linux, Windows)
   * Tenancy (Host, Dedicated, Default)
 
-- Differences between EC2 Reserved Instances and Savings Plans([check link](https://www.cloudzero.com/blog/savings-plans-vs-reserved-instances))
+### AWS Savings Plans Vs. Reserved Instances: [When To Use Each](https://www.cloudzero.com/blog/savings-plans-vs-reserved-instances)  
 
 ### EC2 Spot Instances
 * Can get a discount of up to 90% compared to On-demand
