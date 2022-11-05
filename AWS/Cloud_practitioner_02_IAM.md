@@ -66,19 +66,6 @@
 * You can develop scripts to manage your resources
 * It's an open-source(https://github.com/aws/aws-cli)
 * Alternative to using AWS Management Console
-
-### What's the AWS SDK?
-* AWS Software Development Kit (AWS SDK)
-* Language-specific APIs(set of libraries)
-* Enables you to access and manage AWS services programmatically
-* Embedded within your application
-* Supports
-  * SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js, C++)
-  * Mobile SDKs (Android, iOS)
-  * IoT Devices SDKs(Embedded C, Arduino)
-* Example: AWS CLI is built on AWS SDK for Python
-
-### What's the AWS CLI?
 * With the AWS Command Line Interface, you can manage your multiple AWS services from the command line and automate them through scripts.
 * Usage
   * >aws help
@@ -95,6 +82,17 @@
   * Automatically updated; Fully managed Amazon Linux 2 environment that has the recent versions of popular tools already installed and updated.
   * No cost; It includes 1 GB of persistent storage per Region at no extra cost to you.
   * Customizable; With 1GB of storage per Region, you can store scripts, files, configuration preferences, and additional tools in your home directory.
+
+### What's the AWS SDK?
+* AWS Software Development Kit (AWS SDK)
+* Language-specific APIs(set of libraries)
+* Enables you to access and manage AWS services programmatically
+* Embedded within your application
+* Supports
+  * SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js, C++)
+  * Mobile SDKs (Android, iOS)
+  * IoT Devices SDKs(Embedded C, Arduino)
+* Example: AWS CLI is built on AWS SDK for Python
 
 ### IAM Roles for Services
 * Some AWS service will need to perform actions on your behalf
