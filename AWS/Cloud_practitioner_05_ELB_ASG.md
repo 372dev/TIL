@@ -114,7 +114,7 @@
 * Elastic Load Balancers (ELB)
   * Distribute traffic across backend EC2 instances, can be Multi-AZ
   * Supports health checks
-  * 3 types: Application LB (HTTP-L7), Network LB (TCP-L4), Classic LB (old)
+  * 3 types: Application LB (HTTP-L7), Network LB (TCP-L4), Gateway Load Balancer (3rd party), Classic LB (old/retiring)
 * Auto Scaling Groups (ASG)
   * Implement Elasticity for your application, across multiple AZ
   * Scale EC2 instances based on the demand on your system, replace unhealthy
