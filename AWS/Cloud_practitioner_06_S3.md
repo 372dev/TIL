@@ -8,7 +8,7 @@
 * Amazon S3 is one of the main building blocks of AWS
 * It's advertised as "infinitely scaling" storage
 * Many websites use Amazon S3 as a backbone
-* Many AWS services use Amazon S3 as an integration as well
+* Many AWS services use Amazon S3 as an integration(meaning to stitch subsystems together to work as one) as well
 
 ### Amazon S3 Use cases
 * Backup and storage
@@ -301,7 +301,7 @@
   * Security requirements
   * Compliance requirements
   * IT strategy
-* S3 is a proprietary, meaning private, storage technology (unlike EFS/NFS), so how do you expose the S3 on-premise?
+* S3 is a proprietary(meaning private) storage technology (unlike EFS/NFS), so how do you expose the S3 on-premise?
   * AWS Storage Gateway!
 
 ### AWS Storage Cloud Native Options
