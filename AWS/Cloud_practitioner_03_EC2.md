@@ -128,7 +128,7 @@
 
 ### EC2 Reserved Instances
 * Up to 72% discount compared to On Demand
-* You reserve a specific instances attributes (INstance Type, Region, Tenancy, OS)
+* You reserve a specific instances attributes (Instance Type, Region, Tenancy, OS)
 * Reservation Period - 1 year(+discount) or 3 year(+++discount)
 * Payment Options - No Upfront(+), Partial Upfront(++), All Upfront(+++)
 * Reserved Instance's Scope - Regional or Zonal (reserve capacity in an AZ)
@@ -150,20 +150,19 @@
   * OS (e.g., Linux, Windows)
   * Tenancy (Host, Dedicated, Default)
 
-### AWS Savings Plans Vs. Reserved Instances: [When To Use Each](https://www.cloudzero.com/blog/savings-plans-vs-reserved-instances)  
+### AWS Savings Plans Vs. Reserved Instances: [When To Use Each?](https://www.cloudzero.com/blog/savings-plans-vs-reserved-instances)
+* Reserved Instances are based on the commitment to use an instance at a particular price over a specific period, while Savings Plans are based on the commitment to spend a particular dollar amount per hour over a specific period.
 
 ### EC2 Spot Instances
 * Can get a discount of up to 90% compared to On-demand
 * Instances that you can "lose" at any point of time if your max price is less than the current spot price
 * The MOST cost-efficient instances in AWS  
-
 * Useful for workloads that are resilient to failure
   * Batch jobs
   * Data analysis
   * Image processing
   * Any distributed workloads
   * Workloads with a flexible start and end time  
-
 * Not suitable for critical jobs or databases
 
 ### EC2 Dedicated Hosts
