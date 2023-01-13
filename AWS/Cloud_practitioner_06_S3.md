@@ -36,7 +36,7 @@
 
 ### Amazon S3 - Objects
 * Objects (files) hava a key
-* THe "key" is the FULL path
+* The "key" is the FULL path
   * s3://my-backet/"my_file.txt"
   * s3://my-bucket/"my_folder1/another_folder/my_file.txt"
 * The key is composed of "prefix" + "object name"
@@ -91,7 +91,7 @@
 
 ### Amazon S3 - Static Website Hosting
 * S3 can host static websites and have them accessible on the Internet
-* THe website URL will be (depending on the region)
+* The website URL will be (depending on the region)
   * http://bucket-name.s3-website-aws-region.amazonaws.com OR
   * http://bucket-name.s3-website.aws-region.amazonaws.com
 * If you get a 403 Forbidden error, make sure the bucket policy allows public reads
@@ -204,7 +204,7 @@
 
 ### Data Migrations with AWS Snow Family
 * Challenges of migrations: (e.g. client to Amazon S3 bucket by www: 10Gbit/s)
-  * Limited Limited connectivity
+  * Limited connectivity
   * Limited bandwidth
   * High network cost
   * Shared bandwidth (can't maximize the line)
